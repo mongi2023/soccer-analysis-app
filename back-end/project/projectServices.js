@@ -14,6 +14,10 @@ const getProjectByIdService = (id) => {
   const project = Project.findById(id);
   return project;
 };
+const getProjectByNameService = (name) => {
+  const project = Project.findOne({name})
+  return project
+}
 
 const updateProjectService = (id, data) => {
   const project_to_update = Project.findByIdAndUpdate(
@@ -47,4 +51,5 @@ module.exports = {
   getProjectsService,
   updateProjectService,
   deleteProjectService,
+  getProjectByNameService
 };
