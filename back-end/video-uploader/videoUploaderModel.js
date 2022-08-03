@@ -18,15 +18,30 @@ const VideoSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Extension is important']
     },
+    path: {
+        type: String
+    },
     origin: {
         type: String,
         required: [true, 'You should define the origin of your file']
     },
-    projectID: {
+    project: {
         type: mongoose.Types.ObjectId,
         ref: 'Project',
         required: [true, 'You need to specify the project, where the file is belong']
+    },
+    user: {
+        type: mongoose.Types.ObjectId,
+        ref: 'UserApp',
+        required: true
     }
-}, {timestamps:true})
-
+}, {timestamps:true
+    , toJSON: {virtuals: true}, toObject: {virtuals: true}
+})
+VideoSchema.virtual('videoSequences', {
+    ref: 'Sequence',
+    localField: '_id',
+    foreignField: 'original_video',
+    justOne: false
+})
 module.exports = mongoose.model('Video', VideoSchema)
