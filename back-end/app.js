@@ -5,6 +5,7 @@ const app = express();
 const helmet = require('helmet')
 const xss = require('xss-clean')
 const morgan = require('morgan')
+const cookieParser = require('cookie-parser')
 
 // * ROUTES IMPORTS
 const projectRouter = require('./project/projectRoutes');
