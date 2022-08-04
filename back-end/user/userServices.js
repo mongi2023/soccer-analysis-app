@@ -23,9 +23,9 @@ const updateUserProfileService = (id, data) => {
     return user
 }
 
-const updateUserPasswordService = (id, password) => {
-    const user = UserApp.findOneAndUpdate({id}, password, {new: true, runValidators: true})
-    return user
+const updateUserPasswordService = (user) => {
+    // const user = UserApp.findOneAndUpdate({id}, password, {new: true, runValidators: true})
+    return user.save()
 }
 
 module.exports = {

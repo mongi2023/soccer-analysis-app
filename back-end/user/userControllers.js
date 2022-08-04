@@ -96,7 +96,7 @@ const updateProfileUserController = async(req, res) => {
   }
   const objectToUpdate = {}
   
-  const getConnectedUser = await getUserByIdService(user)
+  const getConnectedUser = await getUserByIdService(user).select('-password')
   if(!getConnectedUser){
     throw new CustomError.UnauthenticatedError('Invalid authentication')
   }
@@ -107,7 +107,7 @@ const updateProfileUserController = async(req, res) => {
   if(email){
     if(email === getConnectedUser.email) {
       //? Check if the typed new email is exist
-      const isMailExist = await getUserByEmailService(email).where('_id').ne(getConnectedUser._id);
+      const isMailExist = await getUserByEmailService(email).where('_id').ne(getConnectedUser._id).select('-password')
       if(isMailExist){
         throw new CustomError.BadRequestError('Invalid credentials - email')
       }
@@ -131,10 +131,31 @@ const updateProfileUserController = async(req, res) => {
   res.status(StatusCodes.OK).send({msg: 'You data updated successfully !', user: updateUser})
 }
 
+const udpateUserPasswordController = async(req, res) => {
+  const {old_password, new_password} = req.body
+  const user_id = req.params.id
+  const userConnected = req.user.userId
+  if(userConnected !== user_id) {
+    throw new CustomError.UnauthenticatedError('Invalid credentials')
+  }
+  if(!old_password || !new_password){
+    throw new CustomError.BadRequestError('Please provide both of your old and new passwords')
+  }
+  const user = await getUserByIdService(user_id)
+  const isMatch = user.comparePassword(old_password)
+  if(!isMatch){
+    throw new CustomError.BadRequestError('You need to provide the correct old password')
+  }
+  user.password = new_password
+  await updateUserPasswordService(user)
+  
+  res.status(StatusCodes.OK).send({msg: 'password updated successfully'})
+}
 
 module.exports = {
   registerUserController,
   loginUserController,
   logoutUserController,
-  updateProfileUserController
+  updateProfileUserController,
+  udpateUserPasswordController
 };
