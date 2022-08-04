@@ -19,13 +19,13 @@ const getUserByEmailService = (email) => {
 
 
 const updateUserProfileService = (id, data) => {
-    const user = UserApp.findOneAndUpdate({id}, data, {new: true, runValidators: true})
+    const user = UserApp.findOneAndUpdate({_id: id}, data, {new: true, runValidators: true})
     return user
 }
 
-const updateUserPasswordService = (id, password) => {
-    const user = UserApp.findOneAndUpdate({id}, password, {new: true, runValidators: true})
-    return user
+const updateUserPasswordService = (user) => {
+    // const user = UserApp.findOneAndUpdate({id}, password, {new: true, runValidators: true})
+    return user.save()
 }
 
 module.exports = {

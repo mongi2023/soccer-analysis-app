@@ -12,6 +12,7 @@ const {
 } = require('./userServices');
 const Token = require('../token/tokenModel');
 const { deleteTokenService } = require('../token/tokenServices');
+const { get } = require('http');
 
 const registerUserController = async (req, res) => {
   const { fullname, email, password } = req.body;
@@ -83,9 +84,78 @@ const logoutUserController = async (req, res) => {
     res.status(StatusCodes.OK).send({msg: 'You logged out!'})
 }
 
+const updateProfileUserController = async(req, res) => {
+  const {
+    body: {fullname, email},
+    user: {userId},
+    params:{id: user}
+  } = req
+
+  if(user !== userId){
+    throw new CustomError.UnauthenticatedError('Invalid credentials')
+  }
+  const objectToUpdate = {}
+  
+  const getConnectedUser = await getUserByIdService(user).select('-password')
+  if(!getConnectedUser){
+    throw new CustomError.UnauthenticatedError('Invalid authentication')
+  }
+  if(fullname){
+    objectToUpdate.fullname = fullname
+  }
+  // ! if email to be updated
+  if(email){
+    if(email === getConnectedUser.email) {
+      //? Check if the typed new email is exist
+      const isMailExist = await getUserByEmailService(email).where('_id').ne(getConnectedUser._id).select('-password')
+      if(isMailExist){
+        throw new CustomError.BadRequestError('Invalid credentials - email')
+      }
+    }
+    objectToUpdate.email = email
+  }
+  // if(password){
+  //   const isMatch = getConnectedUser.comparePassword(password)
+  //   if(!isMatch){
+  //     throw new CustomError.BadRequestError('Invalid authentication - password')
+  //   }
+  //   if(password.length < process.env.PASSWORD_LENGTH){
+  //     throw new CustomError.BadRequestError('Your password should be at least 8 characters')
+  //   }
+  //   objectToUpdate.password = password
+  // }
+  const updateUser = await updateUserProfileService(user, objectToUpdate)
+  if(!updateUser){
+    throw new CustomError.NotFoundError('It appears that you are connected or some details are wrongly typed !')
+  }
+  res.status(StatusCodes.OK).send({msg: 'You data updated successfully !', user: updateUser})
+}
+
+const udpateUserPasswordController = async(req, res) => {
+  const {old_password, new_password} = req.body
+  const user_id = req.params.id
+  const userConnected = req.user.userId
+  if(userConnected !== user_id) {
+    throw new CustomError.UnauthenticatedError('Invalid credentials')
+  }
+  if(!old_password || !new_password){
+    throw new CustomError.BadRequestError('Please provide both of your old and new passwords')
+  }
+  const user = await getUserByIdService(user_id)
+  const isMatch = user.comparePassword(old_password)
+  if(!isMatch){
+    throw new CustomError.BadRequestError('You need to provide the correct old password')
+  }
+  user.password = new_password
+  await updateUserPasswordService(user)
+  
+  res.status(StatusCodes.OK).send({msg: 'password updated successfully'})
+}
 
 module.exports = {
   registerUserController,
   loginUserController,
-  logoutUserController
+  logoutUserController,
+  updateProfileUserController,
+  udpateUserPasswordController
 };
