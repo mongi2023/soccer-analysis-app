@@ -1,21 +1,31 @@
+
 multer = require("multer");
 
 // File upload settings
-const PATH = './uploads';
-  let storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-      cb(null, PATH);
-    },
-    filename: (req, file, cb) => {
-      cb(null, file.originalname);
-    },
-  });
+const PATH = "./uploads";
+let storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, PATH);
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  },
+});
 
-  let upload = multer({
-    storage: storage,
-  });
+let upload = multer({
+  storage: storage,
+   limits: {
+      fileSize: 10000000000
+    }
+
+
+});
+
+
+
+
 
 
 module.exports = {
-upload
-}
+  upload
+};

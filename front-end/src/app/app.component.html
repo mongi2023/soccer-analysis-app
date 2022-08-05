@@ -1,0 +1,9 @@
+
+<div >
+ 
+  <aside><app-sidebar  [visible]=currentItem  ></app-sidebar>
+  </aside>
+  <main>   <app-navbar  [item]=currentItem (newmsg)='childEvent($event)' ></app-navbar> <router-outlet></router-outlet>
+  </main>
+</div>
+<!-- [ngClass]="{ 'active': currentItem }"  -->

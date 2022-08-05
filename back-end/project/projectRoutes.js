@@ -6,15 +6,14 @@ createProjectController,
     deleteProjectController,
     updateProjectController
 } = require('./projectControllers')
-const authenticateUser = require('../middlewares/authentication')
 
 /**
  * , projectRouter, function(req, res){
     res.render('pages/projects')
 }
  */
-projectRouter.route('/').get(authenticateUser, getProjectsController).post(authenticateUser, createProjectController)
-projectRouter.route('/:id').get(authenticateUser, getProjectByIdController).delete(authenticateUser, deleteProjectController).patch(authenticateUser, updateProjectController)
+projectRouter.route('/').get(getProjectsController).post(createProjectController)
+projectRouter.route('/:id').get(getProjectByIdController).delete(deleteProjectController).patch(updateProjectController)
 
 
 module.exports = projectRouter

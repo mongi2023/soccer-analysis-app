@@ -15,13 +15,7 @@ const TeamSchema = new mongoose.Schema(
       type: String,
     },
   },
-  { timestamps: true, toJSON:{virtuals: true}, toObject: {virtuals: true} }
-  );
-  
-  TeamSchema.virtual('players', {
-    ref: 'Player',
-    localField: '_id',
-    foreignField: 'team',
-    justOne: false
-  })
+  { timestamps: true }
+);
+
 module.exports = mongoose.model('Team', TeamSchema);
