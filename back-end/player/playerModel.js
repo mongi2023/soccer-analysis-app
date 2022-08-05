@@ -28,6 +28,11 @@ const PlayerSchema = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: 'Team',
         required: [true, 'You have to enter the team of the player']
+    },
+    user: {
+        type: mongoose.Types.ObjectId,
+        ref : 'UserApp',
+        required: true
     }
 }, {timestamps:true})
 
