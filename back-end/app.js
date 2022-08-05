@@ -50,7 +50,8 @@ app.use('/api/v1/categories', authenticateUser,categoryRouter)
 app.use('/api/v1/sub-categories', subCategoryRouter)
 app.use('/api/v1/sequence', sequenceRouter)
 
-
+// HOTFIX BRANCH CAN ACCESS ALL BRANCHES FOLDERS 
+// FOR EMERGENCY NEEDS
 
 // ? USE OF ERROR HANDLERS
 app.use(notFoundMiddleware)
