@@ -22,6 +22,6 @@ export class NewprojectService {
     
   }
   getAllProjectService(): Observable<Project[]>{
-  return  this.http.get<Project[]>(this.baseApi+'projects')
+  return  this.http.get<Project[]>(this.baseApi+'/projects')
   }
 }
