@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthService } from '../../service/auth.service';
 import { User } from './user';
 
@@ -9,7 +10,10 @@ import { User } from './user';
 })
 export class LoginComponent implements OnInit {
  user!:User
-  constructor(private authService:AuthService) { }
+ loginForm!: FormGroup;
+
+
+  constructor(private authService:AuthService,public formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
   }
@@ -21,6 +25,10 @@ this.authService.loginService(this.user).subscribe(data=>{
   console.log(error);
   
 })
+}
+
+loginUser() {
+  this.authService.loginService(this.loginForm.value)
 }
 
 }
