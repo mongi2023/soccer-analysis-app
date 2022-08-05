@@ -4,6 +4,7 @@ const express = require('express');
 const app = express();
 const helmet = require('helmet')
 const xss = require('xss-clean')
+const cors = require('cors')
 const morgan = require('morgan')
 const cookieParser = require('cookie-parser')
 
@@ -38,6 +39,9 @@ app.use(express.urlencoded({extended: false}))
 
 // ! USING COOKIE PARSER
 app.use(cookieParser(process.env.JWT_SECRET))
+
+// ! USING CORS
+app.use(cors({origin: 'http://localhost:4200', credentials: true}))
 
 // !ROUTES USES
 
