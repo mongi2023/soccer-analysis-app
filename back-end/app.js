@@ -35,7 +35,8 @@ app.use('/api/v1/projects', projectRouter)
 app.use('/api/v1/team', teamRouter)
 app.use('/api/v1/upload-video', videoUploaderRouter)
 
-
+// HOTFIX BRANCH CAN ACCESS ALL BRANCHES FOLDERS 
+// FOR EMERGENCY NEEDS
 
 // ? USE OF ERROR HANDLERS
 app.use(notFoundMiddleware)
