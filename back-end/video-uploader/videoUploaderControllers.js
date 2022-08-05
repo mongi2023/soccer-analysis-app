@@ -7,10 +7,8 @@ createVideoService,
     updateVideoService,
     deleteVideoService
 } = require('./videoUploaderServices')
-const PATH = "./uploads";
+const { getSequencesOfVideosService } = require('../video_sequences/sequenceServices')
 
-const ffprobe = require('ffprobe')
- const ffprobeStatic = require('ffprobe-static');
 
 const createVideoController = async(req, res) => {
     const {
@@ -19,14 +17,19 @@ const createVideoController = async(req, res) => {
         resolution,
         extension,
         origin,
-        projectID
+        project
     } = req.body
 
+    if(!name || !size || !resolution || !extension || !origin || !project) {
+      throw new CustomError.BadRequestError('All data of video information are mendatory !')
+    }
+    req.body.user = req.user.userId
+    const video = await createVideoService({...req.body})
+    res.status(StatusCodes.CREATED).send({video: 'Video created successfully !'})
+
 }
- 
- const uploadVideoController=  async (req, res)=> {
-  const info=  await ffprobe(`${PATH}/${req.file.originalname}`, { path: ffprobeStatic.path })
-  const dur = info.streams[0].duration;
+
+ const uploadVideoController= (req, res)=> {
   if (!req.file) {
     console.log("No file is available!");
     return res.send({
@@ -35,19 +38,55 @@ const createVideoController = async(req, res) => {
 
   } else {
     console.log('File is available!');
-    return  res.send({
-      name: req.file.originalname.split('.')[0],
-      size: `${((req.file.size) * 0.000001).toFixed(2)} Mb`,
-      extension: req.file.originalname.split('.')[1],
-      width :info.streams[0].width,
-      height:`${info.streams[0].height}p`,
-      duration: `${dur.split('.')[0].slice(0,2)}.${dur.split('.')[1].slice(0,2)} seconds`
+    return res.send({
+      success: true
     })
   }
-//*************** */
-
-
-
-
 }
-module.exports={uploadVideoController}
+
+
+const udpateVideoInfoController = async(req, res) => {
+  const {
+    body: {name},
+    user:{userId},
+    params:{id: video_id}
+  } = req
+  if(!name) {
+    throw new CustomError.BadRequestError('Please provide a name for your video')
+  }
+  const video = await updateVideoService(video_id, userId,  {name})
+  if(!video) {
+    throw new CustomError.NotFoundError('It appears that this video does not exist, please check again !')
+  }
+  res.status(StatusCodes.OK).send({msg: 'Your video updated successfully !'})
+}
+
+const getVideoByIdController = async ( req, res ) => {
+  const video_id = req.params.id
+  const user = req.user.userId
+  const video = await getVideoByIdService(video_id, user)
+  if(!video){
+    throw new CustomError.NotFoundError('This video does not exist check again !')
+  }
+  res.status(StatusCodes.OK).send({video: video})
+}
+
+const getSequencesOfVideoController = async(req, res) => {
+  const video_id = req.params.id
+  const user = req.user.userId
+
+  const sequences = await getSequencesOfVideosService(video_id, user)
+  res.status(StatusCodes.OK).send({sequences: sequences})
+}
+
+const deleteVideoController = async(req, res) => {
+  const user = req.user.userId
+  const video_id = req.params.id
+  const video = await deleteVideoService(video_id, user)
+  if(!video){
+    throw new CustomError.NotFoundError('It appears that this video does not exist, please check again')
+  }
+
+  res.status(StatusCodes.OK).send({msg: 'Video deleted successfully !'})
+}
+module.exports={uploadVideoController, udpateVideoInfoController, createVideoController, getVideoByIdController, deleteVideoController, getSequencesOfVideoController}

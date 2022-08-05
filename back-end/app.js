@@ -4,17 +4,18 @@ const express = require('express');
 const app = express();
 const helmet = require('helmet')
 const xss = require('xss-clean')
-const cors = require('cors')
-// var ffmpeg = require('fluent-ffmpeg');
-// ffmpeg.ffprobe('/Users/hicham/Desktop/notion/fireship.io/11-routing.mp4',function(err, metadata) {
-//     console.log('info : ',metadata);
-// });
+const morgan = require('morgan')
+const cookieParser = require('cookie-parser')
 
-app.use(cors())
 // * ROUTES IMPORTS
 const projectRouter = require('./project/projectRoutes');
-const teamRouter = require('./team/teamRoutes')
+const teamRouter = require('./team/teamRoutes');
 const videoUploaderRouter = require('./video-uploader/videoUploaderRoutes');
+const userRouter = require('./user/userRoutes');
+const playerRouter = require('./player/playerRoutes');
+const categoryRouter = require('./actionCategory/actionCategoryRoutes');
+const subCategoryRouter = require('./actionSubCategory/actionSubCategoryRoutes');
+const sequenceRouter = require('./video_sequences/sequenceRoutes');
 
 // ! ERROR HANDLERS IMPORTS
 const notFoundMiddleware = require('./middlewares/not-found')
@@ -22,18 +23,32 @@ const errorHandlerMiddleware = require('./middlewares/error-handler');
 // ! DB IMPORT
 const connectBD = require('./shared-services/connct');
 
+// ? AUTHENTICATION MIDDLEWARE
+const authenticateUser = require('./middlewares/authentication');
+
 // ! PORT SETTING
 const port = process.env.APP_PORT || 3000
+
+// ? MORGAN
+app.use(morgan('tiny'))
 
 // ! hundle body-parsing
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 
+// ! USING COOKIE PARSER
+app.use(cookieParser(process.env.JWT_SECRET))
+
 // !ROUTES USES
 
 app.use('/api/v1/projects', projectRouter)
 app.use('/api/v1/team', teamRouter)
-app.use('/api/v1/upload-video', videoUploaderRouter)
+app.use('/api/v1/upload-video',authenticateUser, videoUploaderRouter)
+app.use('/api/v1/user', userRouter)
+app.use('/api/v1/player', playerRouter)
+app.use('/api/v1/categories', authenticateUser,categoryRouter)
+app.use('/api/v1/sub-categories', subCategoryRouter)
+app.use('/api/v1/sequence', sequenceRouter)
 
 // HOTFIX BRANCH CAN ACCESS ALL BRANCHES FOLDERS 
 // FOR EMERGENCY NEEDS
