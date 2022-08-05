@@ -10,15 +10,9 @@ const ProjectSchema = new mongoose.Schema({
         type: String,
         maxlength: 250,
     },
-    project_path: {
+    path: {
         type: String,
-        required: [true, 'please provide the path to create a project'],
-        select: false
-    },
-    user : {
-        type: mongoose.Types.ObjectId,
-        ref: 'UserApp',
-        required: true
+        
     },
 
 }, {timestamps: true})

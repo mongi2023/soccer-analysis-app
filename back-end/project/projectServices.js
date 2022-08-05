@@ -5,14 +5,13 @@ const createProjectService = (data) => {
   return project;
 };
 
-// .sort('-created_at')
-const getProjectsService = (user) => {
-  const projects = Project.find({user:user}).sort('-createdAt')
+const getProjectsService = () => {
+  const projects = Project.find({});
   return projects;
 };
 
-const getProjectByIdService = (project_id, user_id) => {
-  const project = Project.findOne({_id: project_id, user: user_id});
+const getProjectByIdService = (id) => {
+  const project = Project.findById(id);
   return project;
 };
 const getProjectByNameService = (name) => {
@@ -20,9 +19,9 @@ const getProjectByNameService = (name) => {
   return project
 }
 
-const updateProjectService = (id,userId, data) => {
+const updateProjectService = (id, data) => {
   const project_to_update = Project.findByIdAndUpdate(
-    {_id: id, user: userId},
+    {_id: id},
      data ,
     { new: true, runValidators: true }
   );

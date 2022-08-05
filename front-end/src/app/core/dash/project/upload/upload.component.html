@@ -1,0 +1,99 @@
+<!-- Image and text -->
+
+
+
+      <div class="container">
+        <div class="row">
+          <div class="col-sm">
+                     </div>
+          <div class="col-sm">
+
+
+
+
+                   <div class="col-sm">
+
+
+
+                   </div>
+                  </div>
+        </div>
+      </div>
+
+
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <div class="container2" appDnd (change)="selectVideo($event)">
+              <input
+                type="file"
+                name="image"
+                #fileDropRef
+                id="fileDropRef"
+                multiple
+                (change)="fileBrowseHandler($event.target)"
+              />
+              <img src="assets/ic-upload-file.svg" alt="" />
+              <h3 style="margin-top: 20px;">Drag and drop file here</h3>
+              <h3>or</h3>
+              <label for="fileDropRef" (click)="onSubmit()" style="margin-top: 20px;"
+                >Browse for file</label
+              >
+            </div>
+            <div class="files-list">
+              <div class="single-file" *ngFor="let file of files; let i = index">
+                <img src="assets/ic-file.svg" width="14px" alt="file" />
+                <div class="info">
+                  <h4 class="name">
+                    {{ file?.name }}
+                  </h4>
+                  <p class="size">
+                    {{ formatBytes(file?.size, 2) }}
+                  </p>
+        
+                  <app-progress [progress]="file?.progress"></app-progress>
+                </div>
+                <img
+                  src="assets/ic-delete-file.svg"
+                  class="delete"
+                  width="20px"
+                  alt="file"
+                  (click)="deleteFile(i)"
+                />
+              </div>
+        
+            </div>
+          </div>
+          <div class="col">
+            <form >
+
+              <h6>Name: {{ videoData?.name }}</h6>
+              <h6>Size: {{ videoData?.size }}</h6>
+              <h6>Duration: {{videoData?.duration}} </h6>
+              <h6>Resolution: {{videoData?.height}}</h6>
+              <h6>Extension: {{videoData?.extension}}</h6>
+              <div>
+                <button type="submit" class="btn btn-primary" (click)="onSubmit()" style="margin-left: 200px;">
+                  Upload Video
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            
+      <div class="video" *ngIf="show2" >
+        <video [src]="url" height="300" width="520" controls></video>
+      </div>
+
+
+    
+  </div>
+
+</div>
+</div>

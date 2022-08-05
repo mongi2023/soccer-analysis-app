@@ -6,8 +6,8 @@ const createVideoService = (data) => {
     return video
 }
 
-const getVideoByIdService = (id, user) => {
-    const video = Video.findById({_id: id, user: user})
+const getVideoByIdService = (id) => {
+    const video = Video.findById(id)
     return video
 }
 
@@ -16,17 +16,15 @@ const getVideosService = () => {
     return videos
 }
 
-const updateVideoService = (id, user, data) => {
-    const video = Video.findOneAndUpdate({_id: id, user: user}, data, {new: true, runValidators: true})
+const updateVideoService = (id, data) => {
+    const video = Video.findOneAndUpdate({_id: id}, data, {new: true, runValidators: true})
     return video
 }
 
-const deleteVideoService = (id, user) => {
-    const video = Video.findByIdAndDelete ({_id: id, user: user})
+const deleteVideoService = (id) => {
+    const video = Video.findOneAndDelete(id)
     return video
 }
-
-
 
 
 module.exports = {

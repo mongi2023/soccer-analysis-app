@@ -1,0 +1,79 @@
+
+<!--  -->
+
+<nav class="sidebar" [ngClass]="{ 'active': visible }" >
+    <div class="sidebar-header">
+        <h3 style="text-align: center;">Soccer Hero</h3>
+        <img
+        src="assets/bundesliga-logo.png"
+        width="50"
+        height="50"
+        class="d-inline-block align-top"
+        alt=""
+        style="margin-left: 80px;"
+      />
+    </div>
+
+    <ul class="list-unstyled components">
+        <p>Dummy Heading</p>
+        <li class="active">
+            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+            <ul class="collapse list-unstyled" id="homeSubmenu">
+                <li>
+                    <a routerLink="dash/project/new">Project</a>
+                </li>
+                <li>
+                    <a routerLink="dash/project/upload">Upload Video</a>
+                </li>
+                <li>
+                    <a href="#">Match details</a>
+                </li>
+                <li>
+                  <a href="#">Actions</a>
+              </li>
+              <li>
+                <a routerLink="dash/analyse">Analysis</a>
+            </li>
+            <li>
+              <a href="#">Editing</a>
+          </li>
+          <li>
+            <a href="#">Export</a>
+        </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">About</a>
+        </li>
+        <li>
+            <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
+            <ul class="collapse list-unstyled" id="pageSubmenu">
+                <li>
+                    <a href="#">Project</a>
+                </li>
+                <li>
+                    <a href="#">My uploads</a>
+                </li>
+                <li>
+                    <a href="#">Settings</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">Portfolio</a>
+        </li>
+        <li>
+            <a href="#">Contact</a>
+        </li>
+    </ul>
+
+    <ul class="list-unstyled CTAs">
+        <li>
+            <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a>
+        </li>
+        <li>
+            <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a>
+        </li>
+    </ul>
+</nav>
+
