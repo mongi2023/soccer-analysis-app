@@ -18,7 +18,7 @@ export class NewprojectService {
     const headers = { 'content-type': 'application/json'}  
     const body=JSON.stringify(project);
     console.log('body=',body)
-    return this.http.post(this.baseApi + 'projects', body,{'headers':headers})
+    return this.http.post(this.baseApi + '/projects', body,{'headers':headers})
     
   }
   getAllProjectService(): Observable<Project[]>{

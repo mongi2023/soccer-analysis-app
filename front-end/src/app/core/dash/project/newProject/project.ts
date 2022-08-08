@@ -2,11 +2,11 @@ export class Project {
 
  name:string;
  description:string;
- path:string
+ project_path?:string
 
- constructor( name:string,description:string,path:string){
+ constructor( name:string,description:string,project_path:string){
     this.name=name
     this.description=description
-    this.path=path
+    this.project_path=project_path
  }
 }
