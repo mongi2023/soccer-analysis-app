@@ -46,3 +46,7 @@
 # System files
 /front-end/.DS_Store
 /front-end/Thumbs.db
+
+
+# media files
+/fron-end/assets/messi.mp4
