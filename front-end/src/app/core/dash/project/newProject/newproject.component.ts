@@ -12,6 +12,8 @@ export class NewProjectComponent implements OnInit {
  show2=true
  path2!:string
   projects!:Project[];
+  projects2!:any;
+
   fileOutput: any;
   constructor(private newProjectService: NewprojectService) {}
 
@@ -21,9 +23,14 @@ export class NewProjectComponent implements OnInit {
   getAllProjectController(){
     this.newProjectService.getAllProjectService().subscribe(data=>{
      this.projects= Object.values(data)
+
+     this.projects2=this.projects[0]
+   console.log(this.projects[0]);
+
      console.log(data[0]);
      
      //console.log(this.project);
+
       
     })
   }
@@ -33,6 +40,8 @@ export class NewProjectComponent implements OnInit {
       .subscribe((data) => {
         this.project = data;
         this.show2=!this.show2
+        console.log(data);
+        
           this.getAllProjectController()
          
       });
