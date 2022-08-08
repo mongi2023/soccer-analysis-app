@@ -13,12 +13,12 @@ const ProjectSchema = new mongoose.Schema({
     project_path: {
         type: String,
         required: [true, 'please provide the path to create a project'],
-        select: false
     },
     user : {
         type: mongoose.Types.ObjectId,
         ref: 'UserApp',
-        required: true
+        required: true,
+        select: false
     },
 
 }, {timestamps: true})
