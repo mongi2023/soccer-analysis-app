@@ -7,7 +7,7 @@ import { User } from '../auth/login/user';
     headers: new HttpHeaders
       (
         {
-          'Contenet-type': 'application/json'
+          'Content-Type': 'application/json'
         })
   }
 @Injectable({
@@ -19,6 +19,6 @@ export class AuthService {
   constructor(private _http:HttpClient) { }
 
   loginService(user:User):Observable<User>{
-  return  this._http.post<User>(this.baseAPI+'auth/login',user,httpoptions)
+  return  this._http.post<User>(this.baseAPI+'user/login',user,httpoptions)
   }
 }

@@ -21,6 +21,8 @@ export class NewProjectComponent implements OnInit {
   getAllProjectController(){
     this.newProjectService.getAllProjectService().subscribe(data=>{
      this.projects= Object.values(data)
+     console.log(data[0]);
+     
      //console.log(this.project);
       
     })

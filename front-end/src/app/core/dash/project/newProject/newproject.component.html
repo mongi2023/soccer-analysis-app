@@ -47,12 +47,12 @@
                                                 <textarea
                                                   type="text"
                                                   id="mail"
-                                                  name="project_description"  [(ngModel)]="project.description" 
+                                                  name="description"  [(ngModel)]="project.description" 
                                                 
                                                   rows="5"
                                                 ></textarea>
                                                 <label for="name">Project path:</label>
-                                                <input type="text" id="name" name="path"    [(ngModel)]="project.path"  />
+                                                <input type="text" id="name" name="project_path"    [(ngModel)]="project.project_path"  />
                                                 <input type="file" id="path" (change)="onChange($event)" directory/>
                                                 <label>Source</label>
                                                 <input type="radio" id="local" value="local" name="local" /><label
@@ -100,7 +100,7 @@
                                   <th scope="row">1</th>
                                   <td>{{p.name}}</td>
                                   <td>{{p.description}}</td>
-                                  <td>{{p.path}}</td>
+                                  <td>{{p.project_path}}</td>
 
                               </tr>
                               
