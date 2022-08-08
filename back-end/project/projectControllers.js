@@ -40,13 +40,13 @@ const createProjectController = async (req, res) => {
     fs.mkdirSync(resolve('my_projects', projectName), { recursive: true });
   }
 
-  res.status(StatusCodes.CREATED).send({ msg: 'Project created successfully' });
+  res.status(StatusCodes.CREATED).json({ msg: 'Project created successfully' });
 };
 
 const getProjectsController = async (req, res) => {
   const user = req.user.userId;
   const projects = await getProjectsService(user);
-  res.status(StatusCodes.OK).send({ projects: projects });
+  res.status(StatusCodes.OK).json({ projects: projects });
 };
 
 const getProjectByIdController = async (req, res) => {
@@ -55,7 +55,7 @@ const getProjectByIdController = async (req, res) => {
   if (!project) {
     throw new CustomError.NotFoundError('This project does not exist');
   }
-  res.status(StatusCodes.OK).send({ project: project });
+  res.status(StatusCodes.OK).json({ project: project });
 };
 
 /**
@@ -81,7 +81,7 @@ const updateProjectController = async (req, res) => {
       `Oops ! There was an error check the ID of your project`
     );
   }
-  res.status(StatusCodes.OK).send({ msg: 'Project updated successfully' });
+  res.status(StatusCodes.OK).json({ msg: 'Project updated successfully' });
 };
 
 
@@ -100,7 +100,7 @@ const deleteProjectController = async (req, res) => {
       `There was an error, check the ID of your project`
     );
   }
-  res.status(StatusCodes.OK).send({ msg: `Project deleted successfully` });
+  res.status(StatusCodes.OK).json({ msg: `Project deleted successfully` });
 };
 
 module.exports = {
