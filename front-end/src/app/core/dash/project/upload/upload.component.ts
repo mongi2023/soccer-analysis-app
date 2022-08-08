@@ -43,12 +43,13 @@ export class UploadComponent implements OnInit {
   onSubmit() {
     const formData = new FormData();
     formData.append('video', this.videos);
-
+   let project_Id=localStorage.getItem('id_project')
+   
     this.http
-      .post<any>('http://localhost:3000/api/v1/upload-video', formData)
+      .post<any>(`http://localhost:3000/api/v1/upload-video/${project_Id}`, formData)
       .subscribe((data) => {
         this.videoData = data;
-        console.log('data =',JSON.stringify(data) );
+        console.log('data =',this.videoData);
       });
   }
 
