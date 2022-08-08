@@ -3,7 +3,6 @@
 # /back-end/.env
 /back-end/node_modules
 /back-end/uploads
-
 #FRONT-END FOLDER
 
 # Compiled output
@@ -46,3 +45,4 @@
 # System files
 /front-end/.DS_Store
 /front-end/Thumbs.db
+/front-end/src/assets/messi.mp4

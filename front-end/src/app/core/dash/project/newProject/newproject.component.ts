@@ -23,8 +23,14 @@ export class NewProjectComponent implements OnInit {
   getAllProjectController(){
     this.newProjectService.getAllProjectService().subscribe(data=>{
      this.projects= Object.values(data)
+
      this.projects2=this.projects[0]
    console.log(this.projects[0]);
+
+     console.log(data[0]);
+     
+     //console.log(this.project);
+
       
     })
   }
