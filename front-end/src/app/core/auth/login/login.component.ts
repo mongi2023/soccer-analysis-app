@@ -23,7 +23,8 @@ export class LoginComponent implements OnInit {
   }
 loginController(){
 this.authService.loginService(this.loginForm.value).subscribe(data=>{
-  console.log(data);
+  console.log(Object.values(data)[0].userId);
+  localStorage.setItem('userId',Object.values(data)[0].userId)
   this.router.navigate(['/'])
   })
   

@@ -47,7 +47,7 @@ app.use(cors({origin: 'http://localhost:4200', credentials: true}))
 
 app.use('/api/v1/projects', projectRouter)
 app.use('/api/v1/team', teamRouter)
-app.use('/api/v1/upload-video',authenticateUser, videoUploaderRouter)
+app.use('/api/v1/upload-video', videoUploaderRouter)
 app.use('/api/v1/user', userRouter)
 app.use('/api/v1/player', playerRouter)
 app.use('/api/v1/categories', authenticateUser,categoryRouter)

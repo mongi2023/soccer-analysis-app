@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NewprojectService } from './newproject.service';
 import { Project } from './project';
 
@@ -8,14 +9,14 @@ import { Project } from './project';
   styleUrls: ['./newproject.component.css'],
 })
 export class NewProjectComponent implements OnInit {
-  project=new Project("","","")
+  project=new Project("","","","")
  show2=true
  path2!:string
   projects!:Project[];
   projects2!:any;
 
   fileOutput: any;
-  constructor(private newProjectService: NewprojectService) {}
+  constructor(private newProjectService: NewprojectService,private router:Router) {}
 
   ngOnInit(): void {
     this.getAllProjectController()
@@ -63,4 +64,14 @@ export class NewProjectComponent implements OnInit {
     console.log(file);
     
 }
-}}
+}
+
+startProject(path:string,_id:string){
+  
+  localStorage.setItem('path',path)
+  localStorage.setItem('id_project',_id)
+
+  this.router.navigate(['/dash/project/upload'])
+}
+
+}
