@@ -15,11 +15,13 @@ const {
 const createProjectController = async (req, res) => {
   const { name, project_path, description } = req.body;
   // path.join(__dirname, '..', 'test', 'karma.conf.js')
+
+  // const project_name = 
   req.body.project_path = path.join(
     __dirname,
     '..',
     'my_projects',
-    name.split(' ').join('')
+    name
   );
   console.log(req.body.project_path);
   if (!name) {
@@ -39,6 +41,8 @@ const createProjectController = async (req, res) => {
   if (!fs.existsSync(resolve('my_projects', projectName))) {
     fs.mkdirSync(resolve('my_projects', projectName), { recursive: true });
   }
+  // req.body.path = resolve('my_projects', projectName)
+  // console.log(req.body.path)
 
   res.status(StatusCodes.CREATED).send({ msg: 'Project created successfully' });
 };
