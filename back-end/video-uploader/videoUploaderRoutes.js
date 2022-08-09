@@ -6,7 +6,7 @@ const videoUploaderRouter = require('express').Router()
 
 
 videoUploaderRouter.route('/create').post(authenticateUser, createVideoController)
-videoUploaderRouter.route('/:id').get(authenticateUser, getVideoByIdController).post([upload.single('video'), authenticateUser],uploadVideoController).patch(authenticateUser, udpateVideoInfoController).delete(authenticateUser, deleteVideoController)
+videoUploaderRouter.route('/:id').get(authenticateUser, getVideoByIdController).post([upload,authenticateUser ],uploadVideoController).patch(authenticateUser, udpateVideoInfoController).delete(authenticateUser, deleteVideoController)
 videoUploaderRouter.route('/:id/sequences').get(authenticateUser, getSequencesOfVideoController)
 // videoUploaderRouter.post('/:id',)
 

@@ -19,8 +19,8 @@ const routes: Routes = [
     loadChildren: () => import('./project/upload.module').then(m => m.UploadModule)
   },
   {
-    path: 'document',
-    loadChildren: () => import('./document/document.module').then(m => m.DocumentModule)
+    path: 'match',
+    loadChildren: () => import('./match/match.module').then(m => m.MatchModule)
   },
   {
     path: 'iventory',

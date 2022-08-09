@@ -11,8 +11,12 @@ const {
   getSequencesOfVideosService,
 } = require("../video_sequences/sequenceServices");
 const { getProjectByIdService } = require("../project/projectServices");
+var express = require('express'),
+app = express()
+
 multer = require("multer");
 const fse = require("fs-extra");
+
 const { path, resolve } = require("path");
 const createVideoController = async (req, res) => {
   const { name, size, resolution, extension, origin, project } = req.body;
@@ -29,26 +33,7 @@ const createVideoController = async (req, res) => {
     .send({ video: "Video created successfully !" });
 };
 
-//********************************************************************** */
-const uploadVideoController = async (req, res) => {
-  const project_id = req.params.id;
-  if(!project_id) throw new CustomError.BadRequestError('missing ID')
-  const project = await getProjectByIdService(project_id, req.user.userId);
-  if (!project) throw new CustomError.NotFoundError("NOT FOUND");
-  const path_from_project = project.project_path;
-  console.log(project);
-  fse.writeFileSync('path.txt',path_from_project )
-  if (!req.file) {
-    console.log("No file is available!");
-    return res.send({
-      success: false,
-    });
-  }
-  console.log("File is available!");
-  return res.send({
-    success: true,
-  });
-};
+
 //******************************************* */
 const udpateVideoInfoController = async (req, res) => {
   const {
@@ -103,11 +88,38 @@ const deleteVideoController = async (req, res) => {
   res.status(StatusCodes.OK).send({ msg: "Video deleted successfully !" });
 };
 
-// File upload settings
 
+//***************************************************** */
 
+//********************************************************************** */
+let tab=new Array()
+const uploadVideoController = async (req, res) => {
+  const project_id = req.params.id;
+  const project = await getProjectByIdService(project_id, req.user.userId);
+  console.log(project_id);
+  if (!project) throw new CustomError.NotFoundError("NOT FOUND");
+  if(!project_id) throw new CustomError.BadRequestError('missing ID')
+
+  const path_from_project = project.project_path;
+  tab.push(project.project_path)
+  //tt2 = Array.from(tab.push(project.project_path));
+  console.log('tab=',tab);
+  fse.writeFileSync('path.txt',path_from_project )
+  if (!req.file) {
+    console.log("No file is available!");
+    return res.send({
+      success: false,
+    });
+  }
+  console.log("File is available!");
+  return res.send({
+    success: true,
+  });
+};
+
+//*************************************** */
 const PATH = fse.readFileSync('path.txt')+'';
-console.log(PATH);
+console.log('tab=',tab);
 
 let storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -118,9 +130,8 @@ let storage = multer.diskStorage({
   },
 });
 
-let upload = multer({
-  storage: storage,
-});
+let upload = multer({storage: storage}).single('video');
+
 
 module.exports = {
   upload,

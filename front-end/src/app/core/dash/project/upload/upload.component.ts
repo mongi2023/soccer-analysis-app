@@ -6,9 +6,11 @@ const httpoptions = {
   headers: new HttpHeaders
     (
       {
-        'Contenet-type': 'application/json'
+        'Contenet-type': 'multipart/form-data'
       })
 }
+
+
 @Component({
   selector: 'app-upload',
   templateUrl: './upload.component.html',
@@ -35,6 +37,7 @@ export class UploadComponent implements OnInit {
   selectVideo(event: any) {
     var reader = new FileReader();
     const file = event.target.files[0];
+localStorage.clear
 
     if (event.target.files.length > 0) {
       reader.readAsDataURL(file);
@@ -50,12 +53,12 @@ export class UploadComponent implements OnInit {
 
   onSubmit() {
     const formData = new FormData();
-    
+   let options = { content: formData };
+
     formData.append('video', this.videos);
   // fsExtra.copyFileSync(pathOrigin, `${pathDest}`);
-
    let project_Id=localStorage.getItem('id_project')
-console.log(project_Id);
+   console.log(project_Id);
 
     this.http
       .post<any>(`http://localhost:3000/api/v1/upload-video/${project_Id}`, formData,httpoptions)
