@@ -1,14 +1,13 @@
 const authenticateUser = require('../middlewares/authentication')
-const { upload,move } = require('./uploadSettings')
-const {uploadVideoController, createVideoController, getVideoByIdController, udpateVideoInfoController, deleteVideoController, getSequencesOfVideoController} = require('./videoUploaderControllers')
+const {upload,uploadVideoController, createVideoController, getVideoByIdController, udpateVideoInfoController, deleteVideoController, getSequencesOfVideoController} = require('./videoUploaderControllers')
 const videoUploaderRouter = require('express').Router()
 
 
 
 
-videoUploaderRouter.post('/:id',upload.single('video'), authenticateUser,uploadVideoController)
-videoUploaderRouter.route('/create').post(createVideoController)
-videoUploaderRouter.route('/:id').get(getVideoByIdController).patch(udpateVideoInfoController).delete(deleteVideoController)
-videoUploaderRouter.route('/:id/sequences').get(getSequencesOfVideoController)
+videoUploaderRouter.route('/create').post(authenticateUser, createVideoController)
+videoUploaderRouter.route('/:id').get(authenticateUser, getVideoByIdController).post([upload.single('video'), authenticateUser],uploadVideoController).patch(authenticateUser, udpateVideoInfoController).delete(authenticateUser, deleteVideoController)
+videoUploaderRouter.route('/:id/sequences').get(authenticateUser, getSequencesOfVideoController)
+// videoUploaderRouter.post('/:id',)
 
 module.exports=videoUploaderRouter
