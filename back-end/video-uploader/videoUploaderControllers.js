@@ -11,9 +11,9 @@ const {
   getSequencesOfVideosService,
 } = require("../video_sequences/sequenceServices");
 const { getProjectByIdService } = require("../project/projectServices");
-const fs =require('fs')
-const fse = require('fs-extra')
-const {path,resolve} =require('path')
+multer = require("multer");
+const fse = require("fs-extra");
+const { path, resolve } = require("path");
 const createVideoController = async (req, res) => {
   const { name, size, resolution, extension, origin, project } = req.body;
 
@@ -29,23 +29,15 @@ const createVideoController = async (req, res) => {
     .send({ video: "Video created successfully !" });
 };
 
+//********************************************************************** */
 const uploadVideoController = async (req, res) => {
-  // res.setHeader("refreshToken", req.signedCookies.refreshToken)
-  // res.setHeader("accessToken", req.signedCookies.accessToken)
   const project_id = req.params.id;
-
+  if(!project_id) throw new CustomError.BadRequestError('missing ID')
   const project = await getProjectByIdService(project_id, req.user.userId);
   if (!project) throw new CustomError.NotFoundError("NOT FOUND");
-  // let  PATH = `${project.project_path}`
-  let PATH = "./uploads";
-
-  // readStream.on('error', callback);
-  // writeStream.on('error', callback);
-
-  //  readStream.on('close', function () {
-  // fs.unlink(oldPath, callback);
-  //  });
-
+  const path_from_project = project.project_path;
+  console.log(project);
+  fse.writeFileSync('path.txt',path_from_project )
   if (!req.file) {
     console.log("No file is available!");
     return res.send({
@@ -53,18 +45,11 @@ const uploadVideoController = async (req, res) => {
     });
   }
   console.log("File is available!");
-  console.log(project.project_path);
-  fse.copySync(PATH, `${project.project_path}`);
-  console.log(`${__dirname}\\uploads\\${req.file.originalname}`);
-  fse.removeSync(`${__dirname}\\uploads\\${req.file.originalname}`, err => {
-    if (err) return console.error(err)
-    console.log('success!')
-  })
   return res.send({
     success: true,
   });
 };
-
+//******************************************* */
 const udpateVideoInfoController = async (req, res) => {
   const {
     body: { name },
@@ -117,7 +102,28 @@ const deleteVideoController = async (req, res) => {
 
   res.status(StatusCodes.OK).send({ msg: "Video deleted successfully !" });
 };
+
+// File upload settings
+
+
+const PATH = fse.readFileSync('path.txt')+'';
+console.log(PATH);
+
+let storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, PATH);
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  },
+});
+
+let upload = multer({
+  storage: storage,
+});
+
 module.exports = {
+  upload,
   uploadVideoController,
   udpateVideoInfoController,
   createVideoController,

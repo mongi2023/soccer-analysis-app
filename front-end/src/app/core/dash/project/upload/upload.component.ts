@@ -1,8 +1,14 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Video } from './video';
 import { VideoUploadService } from './video-upload.service';
-
+const httpoptions = {
+  headers: new HttpHeaders
+    (
+      {
+        'Contenet-type': 'application/json'
+      })
+}
 @Component({
   selector: 'app-upload',
   templateUrl: './upload.component.html',
@@ -36,19 +42,28 @@ export class UploadComponent implements OnInit {
         this.url = (<FileReader>event.target).result;
         this.videos = file;
         this.show2=!this.show2
+      //  console.log(reader.result);
+        
       };
     }
   }
 
   onSubmit() {
     const formData = new FormData();
+    
     formData.append('video', this.videos);
+  // fsExtra.copyFileSync(pathOrigin, `${pathDest}`);
+
    let project_Id=localStorage.getItem('id_project')
-   
+console.log(project_Id);
+
     this.http
-      .post<any>(`http://localhost:3000/api/v1/upload-video/${project_Id}`, formData)
+      .post<any>(`http://localhost:3000/api/v1/upload-video/${project_Id}`, formData,httpoptions)
       .subscribe((data) => {
+        console.log(data);
+        
         this.videoData = data;
+
         console.log('data =',this.videoData);
       });
   }

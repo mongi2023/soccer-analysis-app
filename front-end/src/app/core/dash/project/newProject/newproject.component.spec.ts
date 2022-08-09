@@ -4,7 +4,7 @@ import { NewProjectComponent } from './newproject.component';
 
 
 
-describe('FournisseurComponent', () => {
+describe('NewProjectComponent', () => {
 
   let component: NewProjectComponent;
   let fixture: ComponentFixture<NewProjectComponent>;
