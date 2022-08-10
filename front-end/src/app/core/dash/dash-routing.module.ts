@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TeamsComponent } from './teams/teams.component';
+import { PlayersComponent } from './players/players.component';
 import { AnalyseComponent } from './analyse/analyse.component';
 import { SequenceComponent } from './sequence/sequence.component';
 
@@ -12,7 +12,7 @@ const routes: Routes = [
     path:'sequence',component:SequenceComponent
   },
   {
-    path:'teams',component:TeamsComponent
+    path:'players',component:PlayersComponent
   },
   {
     path: 'project',
