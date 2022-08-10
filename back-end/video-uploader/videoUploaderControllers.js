@@ -131,7 +131,6 @@ const upload= multer({storage: multer.diskStorage({
    const project =  (await getProjectByIdService2(req.params.id).select('project_path')).project_path
 
     cb(null, `${project}`);
-    console.log(req.file);
 
   },
   filename: (req, file, cb) => {
