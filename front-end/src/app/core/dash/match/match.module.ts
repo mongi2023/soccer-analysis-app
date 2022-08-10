@@ -2,18 +2,20 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { MatchRoutingModule } from './match-routing.module';
-import { DevisComponent } from './devis/devis.component';
+import { TeamComponent } from './teams/team.component';
 import { MatchDetailsComponent } from './match-details/matchDetails.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [
-    DevisComponent,
+    TeamComponent,
     MatchDetailsComponent
   ],
   imports: [
     CommonModule,
-    MatchRoutingModule
+    MatchRoutingModule,
+    ReactiveFormsModule
   ]
 })
 export class MatchModule { }
