@@ -17,6 +17,7 @@ const playerRouter = require('./player/playerRoutes');
 const categoryRouter = require('./actionCategory/actionCategoryRoutes');
 const subCategoryRouter = require('./actionSubCategory/actionSubCategoryRoutes');
 const sequenceRouter = require('./video_sequences/sequenceRoutes');
+const matchRouter = require('./match-details/matchRoutes');
 
 // ! ERROR HANDLERS IMPORTS
 const notFoundMiddleware = require('./middlewares/not-found')
@@ -53,6 +54,7 @@ app.use('/api/v1/player', playerRouter)
 app.use('/api/v1/categories', authenticateUser,categoryRouter)
 app.use('/api/v1/sub-categories', subCategoryRouter)
 app.use('/api/v1/sequence', sequenceRouter)
+app.use('/api/v1/match-details', matchRouter)
 
 // HOTFIX BRANCH CAN ACCESS ALL BRANCHES FOLDERS 
 // FOR EMERGENCY NEEDS
