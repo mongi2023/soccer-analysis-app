@@ -7,7 +7,7 @@ const VideoSchema = new mongoose.Schema({
         required: [true, 'You should specify the name of your file']
     },
     size: {
-        type: Number,
+        type: String,
         required: [true, 'The size of the file is important']
     },
     resolution: {
@@ -17,6 +17,9 @@ const VideoSchema = new mongoose.Schema({
     extension: {
         type: String,
         required: [true, 'Extension is important']
+    },
+    duration : {
+        type: String
     },
     path: {
         type: String

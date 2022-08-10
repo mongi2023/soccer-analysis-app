@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { DocumentRoutingModule } from './document-routing.module';
+import { MatchRoutingModule } from './match-routing.module';
 import { DevisComponent } from './devis/devis.component';
-import { AvoirAComponent } from './avoir-a/avoir-a.component';
+import { MatchDetailsComponent } from './match-details/matchDetails.component';
 
 
 @NgModule({
   declarations: [
     DevisComponent,
-    AvoirAComponent
+    MatchDetailsComponent
   ],
   imports: [
     CommonModule,
-    DocumentRoutingModule
+    MatchRoutingModule
   ]
 })
-export class DocumentModule { }
+export class MatchModule { }

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AvoirAComponent } from './avoir-a.component';
+import { MatchDetailsComponent } from './matchDetails.component';
 
-describe('AvoirAComponent', () => {
-  let component: AvoirAComponent;
-  let fixture: ComponentFixture<AvoirAComponent>;
+describe('MatchDetails', () => {
+  let component: MatchDetailsComponent;
+  let fixture: ComponentFixture<MatchDetailsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AvoirAComponent ]
+      declarations: [ MatchDetailsComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AvoirAComponent);
+    fixture = TestBed.createComponent(MatchDetailsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AvoirAComponent } from './avoir-a/avoir-a.component';
+import { MatchDetailsComponent } from './match-details/matchDetails.component';
 import { DevisComponent } from './devis/devis.component';
 
 const routes: Routes = [
   {
-    path: 'avoirA',
-    component: AvoirAComponent,
+    path: 'matchdetails',
+    component: MatchDetailsComponent,
   },
   {
     path: 'devis',
@@ -18,4 +18,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class DocumentRoutingModule {}
+export class MatchRoutingModule {}
