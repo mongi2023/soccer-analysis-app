@@ -15,6 +15,10 @@ const getProjectByIdService = (project_id, user_id) => {
   const project = Project.findOne({_id: project_id, user: user_id});
   return project;
 };
+const getProjectByIdService2 = (project_id) => {
+  const project = Project.findOne({_id: project_id});
+  return project;
+};
 const getProjectByNameService = (name) => {
   const project = Project.findOne({name})
   return project
@@ -47,6 +51,7 @@ const updateProjectStatusService = (id) => {
 const getProjectSizeService = (id) => {};
 
 module.exports = {
+  getProjectByIdService2,
   createProjectService,
   getProjectByIdService,
   getProjectsService,

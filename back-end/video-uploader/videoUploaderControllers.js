@@ -3,30 +3,25 @@ const { StatusCodes } = require("http-status-codes");
 const {
   createVideoService,
   getVideoByIdService,
-  getVideosService,
   updateVideoService,
   deleteVideoService,
 } = require("./videoUploaderServices");
 const {
   getSequencesOfVideosService,
 } = require("../video_sequences/sequenceServices");
-const { getProjectByIdService } = require("../project/projectServices");
-var express = require('express'),
-app = express()
-
+const { getProjectByIdService, getProjectByIdService2 } = require("../project/projectServices");
+const ffprobeStatic = require('ffprobe-static');
 multer = require("multer");
-const fse = require("fs-extra");
+const ffprobe = require("ffprobe");
+const moment = require("moment");
 
-const { path, resolve } = require("path");
 const createVideoController = async (req, res) => {
   const { name, size, resolution, extension, origin, project } = req.body;
-
-  if (!name || !size || !resolution || !extension || !origin || !project) {
-    throw new CustomError.BadRequestError(
-      "All data of video information are mendatory !"
-    );
-  }
-  req.body.user = req.user.userId;
+   if (!name || !size || !resolution || !extension || !origin || !project) {
+     throw new CustomError.BadRequestError(
+       "All data of video information are mendatory !"
+     );
+   }
   const video = await createVideoService({ ...req.body });
   res
     .status(StatusCodes.CREATED)
@@ -34,7 +29,6 @@ const createVideoController = async (req, res) => {
 };
 
 
-//******************************************* */
 const udpateVideoInfoController = async (req, res) => {
   const {
     body: { name },
@@ -89,48 +83,62 @@ const deleteVideoController = async (req, res) => {
 };
 
 
-//***************************************************** */
 
-//********************************************************************** */
-let tab=new Array()
-const uploadVideoController = async (req, res) => {
+
+  const uploadVideoController = async (req, res,next) => {
+
   const project_id = req.params.id;
-  const project = await getProjectByIdService(project_id, req.user.userId);
-  console.log(project_id);
+  const project = await getProjectByIdService2(project_id);
+  const info=  await ffprobe(`${project.project_path}/${req.file.originalname}`, { path: ffprobeStatic.path })
+
+  const dur = info.streams[0].duration;
+  const formatted = moment.utc(dur * 1000).format("HH:mm:ss");
+  //var s = moment().duration(dur,'seconds')
+
+
+ // var display  = moment.duration('20').format("h:mm:ss");
+
+
+
   if (!project) throw new CustomError.NotFoundError("NOT FOUND");
   if(!project_id) throw new CustomError.BadRequestError('missing ID')
-
-  const path_from_project = project.project_path;
-  tab.push(project.project_path)
-  //tt2 = Array.from(tab.push(project.project_path));
-  console.log('tab=',tab);
-  fse.writeFileSync('path.txt',path_from_project )
   if (!req.file) {
+   const error = new  Error('No File !')
+   error.httpStatusCode=400
     console.log("No file is available!");
-    return res.send({
-      success: false,
-    });
+    return next(error)
   }
-  console.log("File is available!");
-  return res.send({
-    success: true,
-  });
+  if(req.file){
+    console.log("File is available!");
+    return res.send({
+      name: req.file.originalname,
+      size: `${((req.file.size) * 0.000001).toFixed(2)} Mb`,
+      extension: req.file.originalname.split('.')[1],
+      // width :`${info.streams[0].width}`,
+      // height:`${info.streams[0].height}`,
+      resolution:`${info.streams[0].width}x${info.streams[0].height}`,
+      duration: `${formatted}`});
+
+  }
+  
 };
 
-//*************************************** */
-const PATH = fse.readFileSync('path.txt')+'';
-console.log('tab=',tab);
 
-let storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, PATH);
+const upload= multer({storage: multer.diskStorage({
+
+  destination:async (req, file, cb) => {
+
+   const project =  (await getProjectByIdService2(req.params.id).select('project_path')).project_path
+
+    cb(null, `${project}`);
+    console.log(req.file);
+
   },
   filename: (req, file, cb) => {
+
     cb(null, file.originalname);
   },
-});
-
-let upload = multer({storage: storage}).single('video');
+})}).single('video');
 
 
 module.exports = {
