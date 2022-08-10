@@ -12,6 +12,11 @@ const {
   getProjectByNameService,
 } = require('./projectServices');
 
+/**
+ * Commenting the function
+ * @param {*} req 
+ * @param {*} res 
+ */
 const createProjectController = async (req, res) => {
   const { name, project_path, description } = req.body;
   // path.join(__dirname, '..', 'test', 'karma.conf.js')
