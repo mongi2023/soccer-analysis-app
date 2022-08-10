@@ -65,12 +65,11 @@
             </div>
           </div>
           <div class="col">
-            <form >
+            <form enctype='multipart/form-data' >
 
               <h6>Name: {{ videoData?.name }}</h6>
               <h6>Size: {{ videoData?.size }}</h6>
               <h6>Duration: {{videoData?.duration}} </h6>
-              <h6>Resolution: {{videoData?.height}}</h6>
               <h6>Extension: {{videoData?.extension}}</h6>
               <div>
                 <button type="submit" class="btn btn-primary" (click)="onSubmit()" style="margin-left: 200px;">

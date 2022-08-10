@@ -1,21 +1,33 @@
 export class Video {
-    
-    
- name:string;
- resolution:string;
- extension:string;
- duration:string
- size:string
- height:string
+  name?: string;
+  resolution?: string;
+  extension?: string;
+  duration?: string;
+  size?: string;
+  user?: string;
+  project?: string;
+  origin?:string
+  path?:string
 
- constructor( name:string,resolution:string,extension:string,duration:string,size:string,height:string){
-    this.name=name
-    this.extension=extension
-    this.resolution=resolution
-    this.duration=duration
-    this.size=size
-    this.height=height
-
- }
-
+  constructor(
+    name: string,
+    resolution: string,
+    extension: string,
+    duration: string,
+    size: string,
+    user: string,
+    project: string,
+    origin:string,
+    path:string
+  ) {
+    this.name = name;
+    this.extension = extension;
+    this.resolution = resolution;
+    this.duration = duration;
+    this.size = size;
+    this.user = user;
+    this.project = project;
+    this.origin=origin
+    this.path=path
+  }
 }

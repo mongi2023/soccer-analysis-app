@@ -9,7 +9,7 @@ import { Project } from './project';
   styleUrls: ['./newproject.component.css'],
 })
 export class NewProjectComponent implements OnInit {
-  project=new Project("","","","")
+  project=new Project("","","")
  show2=true
  path2!:string
   projects!:Project[];
@@ -26,7 +26,7 @@ export class NewProjectComponent implements OnInit {
      this.projects= Object.values(data)
 
      this.projects2=this.projects[0]
-   console.log(this.projects[0]);
+  // console.log(this.projects[0]);
 
    //  console.log(data[0]);
      
@@ -41,7 +41,7 @@ export class NewProjectComponent implements OnInit {
       .subscribe((data) => {
         this.project = data;
         this.show2=!this.show2
-        console.log(data);
+     //   console.log(data);
         
           this.getAllProjectController()
          
