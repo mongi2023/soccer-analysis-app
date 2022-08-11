@@ -166,7 +166,18 @@ a.article:hover {
     MEDIAQUERIES
 ----------------------------------------------------- */
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
+    .sidebar {
+        margin-left: -250px;
+    }
+    .sidebar.active {
+        margin-left: 0;
+    }
+    .sidebarCollapse span {
+        display: none;
+    }
+} */
+@media (min-width: 768px) {
     .sidebar {
         margin-left: -250px;
     }

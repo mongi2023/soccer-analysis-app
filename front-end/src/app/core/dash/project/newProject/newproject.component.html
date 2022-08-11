@@ -1,27 +1,23 @@
+<!-- 
 
 
-
-
-<div class="row">
 
 
   
-  <!-- Table -->
+
   <div class="col-10">
     <body class="hm-gradient">
     
       <main>
-          
-          <!--MDB Tables-->
+  
           <div class="container mt-4">
   
             
   
               <div class="card mb-4">
                   <div class="card-body">
-                      <!-- Grid row -->
+                 
                       <div class="row">
-                          <!-- Grid column -->
                           <div class="col-md-12">
                               <h5 class="pt-3 pb-4 text-center font-bold font-up deep-purple-text">  <div class="col-2">
 
@@ -32,27 +28,27 @@
                                       <a href="#" class="btn btn-lg btn-success position" data-toggle="modal" data-target="#basicModal">Add Project</a>
                                     </div>
                                   </div>
-                                <!-- basic modal -->
                                 <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
                                   <div class="modal-dialog">
                                     <div class="modal-content">
                                       <div class="modal-body">
-                                        <div ><form (submit)="$event.preventDefault()" >
+                                        <div ><form (ngSubmit)="createProjectController()" [formGroup]="projectForm"  >
                                             <br><br><br>
                                               <fieldset>
                                                 <legend><span class="number">1</span>Project details</legend>
                                                 <label for="name">Project name:</label>
-                                                <input type="text" id="name" name="name"   [(ngModel)]="project.name"  />
+                                                <input type="text" id="name" formControlName="name"     />
                                                 <label for="mail">Project description:</label>
                                                 <textarea
                                                   type="text"
                                                   id="mail"
-                                                  name="description"  [(ngModel)]="project.description" 
+                                                  formControlName="description"  
                                                 
                                                   rows="5"
                                                 ></textarea>
+                                                
                                                 <label for="name">Project path:</label>
-                                                <input type="text" id="name" name="project_path"    [(ngModel)]="project.project_path"  />
+                                                <input type="text" id="name" formControlName="project_path"     />
                                                 <input type="file" id="path" (change)="onChange($event)" directory/>
                                                 <label>Source</label>
                                                 <input type="radio" id="local" value="local" name="local" /><label
@@ -67,7 +63,7 @@
                                                 >
                                               </fieldset>
                                             
-                                              <button type="submit" (click)="createProjectController()" data-dismiss="modal" >Next</button>
+                                              <button type="submit"  data-dismiss="modal" >Next</button>
                                             </form></div>      </div>
                                     </div>
                                   </div>
@@ -78,13 +74,9 @@
                                   <span class="input-group-addon waves-effect purple lighten-2" id="basic-addon1"><a><i class="fa fa-search white-text" aria-hidden="true"></i></a></span>
                               </div>
                           </div>
-                          <!-- Grid column -->
                       </div>
-                      <!-- Grid row -->
-                      <!--Table-->
                       
                       <table class="table table-striped">
-                          <!--Table head-->
                           <thead>
                               <tr>
                                   <th>#</th>
@@ -93,8 +85,6 @@
                                   <th>Project Path</th>
                               </tr>
                           </thead>
-                          <!--Table head-->
-                          <!--Table body-->
                           <tbody>
                               <tr *ngFor="let p of projects2;  let index = index;">
                                   <th scope="row">1</th>
@@ -102,7 +92,7 @@
                                   <td>{{p.description}}</td>
 
                                   <td>{{p.project_path}}</td>
-                                  <td><button class="btn btn-primary"  (click)="startProject(p.project_path,p._id)" >start</button></td>
+                                  <td><button class="btn btn-primary"  (click)="startProject(p.project_path,p._id,index)" ><i class="fa fa-arrow-circle-right"></i></button></td>
 
                                   
 
@@ -110,9 +100,7 @@
                               </tr>
                               
                           </tbody>
-                          <!--Table body-->
                       </table>
-                      <!--Table-->
                   </div>
               </div>
              
@@ -123,11 +111,108 @@
              
   
           </div>
-          <!--MDB Tables-->
         
       </main>
     
   </body>
 
   </div>
+</div>
+
+
+ -->
+
+
+<div class="container" >
+	<div class="screen">
+		<div class="screen__content">
+
+			<form class="login" [formGroup]="projectForm" (ngSubmit)="createProjectController()">
+				<div class="login__field">
+					<i class="login__icon fas fa-user"></i>
+					<input type="text" class="login__input" formControlName="name" placeholder="project name">
+          <small class="text-danger"
+          *ngIf="errMsg">
+          {{errMsg}}
+      </small>
+				</div>
+        
+				<div class="login__field">
+					<i class="login__icon fas fa-lock"></i>
+					<input type="text" class="login__input"formControlName="description" placeholder="description">
+				</div>
+      	<button type="submit" class="button login__submit">
+					<span class="button__text">Log In Now</span>
+					<i class="button__icon fas fa-chevron-right"></i>
+				</button>				
+			</form>
+
+		</div>
+	
+	</div>
+
+
+
+
+
+
+<mat-form-field appearance="standard">
+  <mat-label>Search</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Project Name" #input>
+</mat-form-field>
+
+<div class="mat-elevation-z8" >
+  <table mat-table [dataSource]="dataSource" matSort>
+
+  
+   
+    <!-- Name Column -->
+    <ng-container matColumnDef="ProjectName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Project Name </th>
+      <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+    </ng-container>
+    <ng-container matColumnDef="Description">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+      <td mat-cell *matCellDef="let row"> {{row.description}} </td>
+    </ng-container>
+
+    <!-- Fruit Column -->
+    <ng-container matColumnDef="ProjectPath">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Project Path </th>
+      <td mat-cell *matCellDef="let row"> {{row.project_path}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="Action" >
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
+      <td mat-cell *matCellDef="let row; let i = index;" class="action">
+      
+        <button mat-icon-button color="primary">
+          <mat-icon>edit</mat-icon>
+        </button>
+        
+        <button mat-icon-button color="warn" >
+          <mat-icon>delete</mat-icon>
+        </button>
+        
+        <button mat-icon-button class="tt"  (click)="startProject(row.project_path,row._id,i)" >
+          <mat-icon>arrow_right_alt</mat-icon>
+        </button>
+       
+
+      </td>
+    </ng-container>
+
+    
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    <!-- Row shown when there is no matching data. -->
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+    </tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+</div>
 </div>

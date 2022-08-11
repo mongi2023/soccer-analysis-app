@@ -22,6 +22,10 @@ export class PlayersComponent implements OnInit {
   ngOnInit(): void {
   }
   playerController(){
+    let project=localStorage.getItem('id_project')
+    let user=localStorage.getItem('userId')
+    let path=localStorage.getItem('path')
+ 
     this.playerService.playerService(this.playerForm.value).subscribe(data=>{
       console.log(data);
      // localStorage.setItem('userId',Object.values(data)[0].userId)

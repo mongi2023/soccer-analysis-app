@@ -6,7 +6,8 @@ import {  NewProjectComponent } from './newProject/newproject.component';
 import { UploadComponent } from './upload/upload.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ProgressComponent } from './upload/progress/progress.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MaterialModule } from 'src/app/shared/material/material.module';
 
 
 @NgModule({
@@ -19,7 +20,9 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     UploadRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MaterialModule,
+    ReactiveFormsModule
   ]
 })
 export class UploadModule { }
