@@ -26,7 +26,6 @@ const createProjectController = async (req, res) => {
     'my_projects',
     name.split(' ').join('')
   );
-  console.log(req.body.project_path);
   if (!name) {
     throw new CustomError.BadRequestError('Please provide the project name');
   }
@@ -38,7 +37,6 @@ const createProjectController = async (req, res) => {
     throw new CustomError.BadRequestError('This project is already exist');
   }
   //creation dossier avec le nom du project
-  req.body.path = '';
   req.body.user = req.user.userId;
   const project = await createProjectService({ ...req.body });
   if (!fs.existsSync(resolve('my_projects', projectName))) {

@@ -1,9 +1,15 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Project } from './project';
-
+const httpoptions = {
+  headers: new HttpHeaders
+    (
+      {
+        'Content-Type': 'application/json'
+      })
+}
 @Injectable({
   providedIn: 'root'
 })
@@ -14,11 +20,8 @@ export class NewprojectService {
   constructor(private http:HttpClient) { }
     
 
-  createProjectService(project:Project): Observable<any> {
-    const headers = { 'content-type': 'application/json'}  
-    const body=JSON.stringify(project);
-    console.log('body=',body)
-    return this.http.post(this.baseApi + '/projects', body,{'headers':headers})
+  createProjectService(project:Project): Observable<Project> {
+    return this.http.post<Project>(this.baseApi + '/projects', project,httpoptions)
     
   }
   getAllProjectService(): Observable<Project[]>{

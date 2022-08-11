@@ -1,27 +1,19 @@
 export class Team {
-    fullname?: string
-    birth_date?:string
-    number?: number;
-    picture?:string;
-    position?: string;
-    teams?: string;
-    project:string
+    
+    name?: string
+    creation_date?:string
+    logo?:string;
+    user?: string;
 
     constructor(
-        fullname: string,
-birth_date:string,
-number: number,
-picture:string,
-position: string,
-teams: string,
-project:string
+        name: string,
+creation_date:string,
+logo:string,
+user: string,
     ){
-        this.fullname = fullname
-        this.birth_date = birth_date
-        this.number = number
-        this.picture = picture
-        this.position = position
-        this.teams = teams
-        this.project=project
+        this.name = name
+        this.creation_date = creation_date
+        this.logo = logo
+        this.user = user
     }
 }

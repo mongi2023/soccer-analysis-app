@@ -7,6 +7,7 @@ import { SequenceComponent } from './sequence/sequence.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { PlayersComponent } from './players/player/player/players.component';
+import { MaterialModule } from 'src/app/shared/material/material.module';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { PlayersComponent } from './players/player/player/players.component';
     DashRoutingModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MaterialModule
   ]
 
 })

@@ -14,13 +14,14 @@ export class TeamComponent implements OnInit {
   teamForm!: FormGroup;
 
   constructor(private teamService:TeamService,public formBuilder: FormBuilder,private router:Router) { 
-    this.teamForm= this.formBuilder.group(new Team('','',0,'','','',''))
+    this.teamForm= this.formBuilder.group(new Team('y','y','y',`${localStorage.getItem('userId')}`))
 
   }
 
   ngOnInit(): void {
   }
   teamController(){
+  
     this.teamService.teamService(this.teamForm.value).subscribe(data=>{
       console.log(data);
      // localStorage.setItem('userId',Object.values(data)[0].userId)

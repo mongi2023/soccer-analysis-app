@@ -15,15 +15,15 @@
               <form action="" class="contact-form" autocomplete="none" [formGroup]="teamForm" (ngSubmit)="teamController()">
                   <div class="input-control input-2">
 
-                      <input formControlName="fullname" type="text" required placeholder="Full Name" autocomplete="none">
+                      <input formControlName="name" type="text" required placeholder="Name" autocomplete="none">
 
-                      <div class="error" data-error="Full Name cannot be empty"></div>
+                      <div class="error" data-error="Name cannot be empty"></div>
 
 
                   </div>
                   <div class="input-control input-2">
-
-                    <input formControlName="birth_date" type="date" required placeholder="Birth Day" autocomplete="none">
+                  
+                    <input formControlName="creation_date" type="date" required placeholder="creation date" autocomplete="none">
 
                     <div class="error" data-error="Birth Day cannot be empty"></div>
 
@@ -31,23 +31,17 @@
                 </div>
                 <div class="input-control input-2">
 
-                  <input formControlName="number" type="number" required placeholder="Number" autocomplete="none">
+                  <input formControlName="logo" type="text" required placeholder="logo" autocomplete="none">
 
                   <div class="error" data-error="Number cannot be empty"></div>
 
 
               </div>
+               
+              
                   <div class="input-control input-2">
 
-
-
-                      <input type="text" formControlName="position" required placeholder="Position" autocomplete="none">
-                      <div class="error" data-error="Position cannot be empty" ></div>
-
-                  </div>
-                  <div class="input-control input-2">
-
-                      <input  type="text" required placeholder="Picture"
+                      <input  type="text" formControlName="user" required placeholder="user"
                            autocomplete="none">
 
                       <div class="error" data-error="Picture cannot be empty" ></div>

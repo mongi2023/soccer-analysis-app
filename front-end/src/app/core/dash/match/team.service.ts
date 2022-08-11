@@ -10,9 +10,16 @@ import { Team } from './team';
 export class TeamService {
 
   baseAPI=environment.baseURL
+
+ // {...this.videoData,project,user,path,origin:'local'}
   constructor(private _http:HttpClient) { }
 
   teamService(team:Team):Observable<Team>{
+
+    let project=localStorage.getItem('id_project')
+    let user=localStorage.getItem('userId')
+    let path=localStorage.getItem('path')
+ 
     return  this._http.post<Team>(this.baseAPI+'/team',team)
     }
 }
