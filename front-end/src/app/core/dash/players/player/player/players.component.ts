@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { TeamService } from '../../../match/team.service';
 import { Player } from '../../player';
 import { PlayerService } from '../../player.service';
 
@@ -12,24 +13,46 @@ import { PlayerService } from '../../player.service';
 })
 export class PlayersComponent implements OnInit {
   player!:Player
-  playerForm!: FormGroup;
+  playerForm= new FormGroup({
+    fullname: new FormControl('', [Validators.required]),
+    birth_date: new FormControl(new Date(), [Validators.required]),
+    number: new FormControl('', [Validators.required]),
+    picture: new FormControl('', [Validators.required]),
+    position: new FormControl('', [Validators.required]),
 
-  constructor(private playerService:PlayerService,public formBuilder: FormBuilder,private router:Router) { 
-    this.playerForm= this.formBuilder.group(new Player('','',0,'','','',''))
+
+  });
+  constructor(private playerService:PlayerService,private teamService: TeamService,public formBuilder: FormBuilder,private router:Router) { 
+    this.formBuilder.group(this.playerForm)
 
   }
 
   ngOnInit(): void {
+  this.getTeamByIdController()
   }
-  playerController(){
+
+  getTeamByIdController(){
+    console.log(`${localStorage.getItem('userId')}`);
+     
+      this.teamService.getTeamByIdService( `${localStorage.getItem('userId')}`
+      ).subscribe(data=>{
+     console.log(data);
+     
+      })
+    }
+  
+
+
+  AddPlayerController(){
     let project=localStorage.getItem('id_project')
     let user=localStorage.getItem('userId')
-    let path=localStorage.getItem('path')
+    let team='62f6246bfcb19a5bcea7aeeb'
+ console.log({...this.playerForm.value,project,user});
  
-    this.playerService.playerService(this.playerForm.value).subscribe(data=>{
+    this.playerService.AddPlayerService({...this.playerForm.value,project,user,team}).subscribe(data=>{
       console.log(data);
      // localStorage.setItem('userId',Object.values(data)[0].userId)
-      this.router.navigate(['/'])
+      alert('Player Added successfully')
       })
       
     }

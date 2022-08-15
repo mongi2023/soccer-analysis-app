@@ -12,10 +12,10 @@
                   <span>then $20/mo. thereafter</span>
               </p>
           </div>
-              <form action="" class="contact-form" autocomplete="none" [formGroup]="playerForm" (ngSubmit)="playerController()">
+              <form action="" class="contact-form" autocomplete="none" [formGroup]="playerForm" (ngSubmit)="AddPlayerController()">
                   <div class="input-control input-2">
 
-                      <input formControlName="fullname" type="text" required placeholder="Full Name" autocomplete="none">
+                      <input formControlName="fullname" type="text"  placeholder="Full Name" autocomplete="none">
 
                       <div class="error" data-error="Full Name cannot be empty"></div>
 
@@ -23,7 +23,7 @@
                   </div>
                   <div class="input-control input-2">
 
-                    <input formControlName="birth_date" type="date" required placeholder="Birth Day" autocomplete="none">
+                    <input formControlName="birth_date" type="date"  placeholder="Birth Day" autocomplete="none">
 
                     <div class="error" data-error="Birth Day cannot be empty"></div>
 
@@ -31,7 +31,7 @@
                 </div>
                 <div class="input-control input-2">
 
-                  <input formControlName="number" type="number" required placeholder="Number" autocomplete="none">
+                  <input formControlName="number" type="number"  placeholder="Number" autocomplete="none">
 
                   <div class="error" data-error="Number cannot be empty"></div>
 
@@ -41,13 +41,13 @@
 
 
 
-                      <input type="text" formControlName="position" required placeholder="Position" autocomplete="none">
+                      <input type="text" formControlName="position"  placeholder="Position" autocomplete="none">
                       <div class="error" data-error="Position cannot be empty" ></div>
 
                   </div>
                   <div class="input-control input-2">
 
-                      <input  type="text" required placeholder="Picture"
+                      <input formControlName="picture"  type="text"  placeholder="Picture"
                            autocomplete="none">
 
                       <div class="error" data-error="Picture cannot be empty" ></div>
@@ -59,7 +59,7 @@
 
 
                   <div class="btn">
-                      <button id="submit">SUBMIT</button>
+                      <button id="submit" type="submit">SUBMIT</button>
                   </div>
                 
               </form>

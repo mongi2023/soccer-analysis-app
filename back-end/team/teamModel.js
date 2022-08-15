@@ -18,7 +18,12 @@ const TeamSchema = new mongoose.Schema(
       type: mongoose.Types.ObjectId,
       ref: 'UserApp',
       required: true
-    }
+    },
+    project: {
+      type: mongoose.Types.ObjectId,
+      ref: 'Project',
+      required: true
+  },
   },
   { timestamps: true, toJSON:{virtuals: true}, toObject: {virtuals: true} }
   );

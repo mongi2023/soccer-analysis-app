@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { map, Observable } from 'rxjs';
 import { Team } from '../team';
 import { TeamService } from '../team.service';
 
@@ -11,21 +12,37 @@ import { TeamService } from '../team.service';
 })
 export class TeamComponent implements OnInit {
   team!:Team
-  teamForm!: FormGroup;
+  teamForm= new FormGroup({
+    name: new FormControl('', [Validators.required]),
+    creation_date: new FormControl('', [Validators.required]),
+    logo: new FormControl('', [Validators.required]),
+    
 
-  constructor(private teamService:TeamService,public formBuilder: FormBuilder,private router:Router) { 
-    this.teamForm= this.formBuilder.group(new Team('y','y','y',`${localStorage.getItem('userId')}`))
+  });
 
+  constructor(private teamService:TeamService,public formBuilder: FormBuilder,private router:Router,
+   public route: ActivatedRoute) { 
+    this.formBuilder.group(this.teamForm)
+    const id = route.snapshot.params['id'];
+  console.log(id);
+  
   }
 
   ngOnInit(): void {
-  }
-  teamController(){
+
   
-    this.teamService.teamService(this.teamForm.value).subscribe(data=>{
+  }
+
+  AddteamController(){
+    let user=localStorage.getItem('userId')
+    let project=localStorage.getItem('id_project')
+
+console.log({...this.teamForm.value,user});
+
+    this.teamService.AddteamService({...this.teamForm.value,user,project}).subscribe(data=>{
       console.log(data);
-     // localStorage.setItem('userId',Object.values(data)[0].userId)
-      this.router.navigate(['/'])
+      alert('Team Added Successfully')
+      
       })
       
     }

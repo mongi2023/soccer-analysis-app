@@ -177,7 +177,7 @@ a.article:hover {
         display: none;
     }
 } */
-@media (min-width: 768px) {
+@media (max-width: 768px) {
     .sidebar {
         margin-left: -250px;
     }

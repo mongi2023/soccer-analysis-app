@@ -27,4 +27,13 @@ export class NewprojectService {
   getAllProjectService(): Observable<Project[]>{
   return  this.http.get<Project[]>(this.baseApi+'/projects')
   }
+
+  deleteProjectService(id:string):Observable<Project>{
+    return this.http.delete<Project>(`${this.baseApi}/projects/${id}`)
+  }
+  updateProjectService(id:string, params: any):Observable<any>{
+    return this.http.patch<Project>(`${this.baseApi}/projects/${id}`,params)
+  }
+
+
 }
