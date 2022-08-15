@@ -129,7 +129,7 @@ startProject(path:string,id:string){
   console.log( localStorage.getItem('id_project'));
   //console.log( localStorage.getItem('team_id'));
   this.getTeamsController()
-//  this.router.navigate(['/dash/project/upload'])
+  this.router.navigate(['/dash/project/upload'])
 }
 getTeamsController(){
   var project3= `${localStorage.getItem('id_project')}`

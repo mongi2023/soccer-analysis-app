@@ -93,13 +93,7 @@ const deleteVideoController = async (req, res) => {
 
   const dur = info.streams[0].duration;
   const formatted = moment.utc(dur * 1000).format("HH:mm:ss");
-  //var s = moment().duration(dur,'seconds')
-
-
- // var display  = moment.duration('20').format("h:mm:ss");
-
-
-
+  
   if (!project) throw new CustomError.NotFoundError("NOT FOUND");
   if(!project_id) throw new CustomError.BadRequestError('missing ID')
   if (!req.file) {
