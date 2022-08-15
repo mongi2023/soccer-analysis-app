@@ -11,7 +11,7 @@ export class PlayerService {
   baseAPI=environment.baseURL
   constructor(private _http:HttpClient) { }
 
-  playerService(player:Player):Observable<Player>{
+  AddPlayerService(player:Player):Observable<Player>{
     return  this._http.post<Player>(this.baseAPI+'/player',player)
     }
 }

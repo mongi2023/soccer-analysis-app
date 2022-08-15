@@ -28,8 +28,16 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatFormFieldModule } from '@angular/material/form-field';
-
-
+import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatSliderModule} from '@angular/material/slider';
+import {MatTreeModule} from '@angular/material/tree';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {OverlayModule} from '@angular/cdk/overlay';
 
 @NgModule({
   declarations: [],
@@ -41,17 +49,24 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatAutocompleteModule, MatTableModule, MatDialogModule, MatTabsModule,
     MatTooltipModule, MatSelectModule, MatPaginatorModule, MatChipsModule,
     MatButtonToggleModule, MatSlideToggleModule, MatBadgeModule, MatCheckboxModule,
-    MatExpansionModule, DragDropModule, MatSortModule,MatFormFieldModule
+    MatExpansionModule, DragDropModule, MatSortModule,MatFormFieldModule,
+    MatBottomSheetModule,MatStepperModule,MatDividerModule,MatGridListModule,
+    MatNativeDateModule, MatRippleModule,MatRadioModule,MatSliderModule,MatTreeModule,
+    FormsModule,ReactiveFormsModule,
   ],
   exports: [
     CommonModule,
     MatSidenavModule, MatIconModule, MatToolbarModule, MatButtonModule,
     MatListModule, MatCardModule, MatProgressBarModule, MatInputModule,
-    MatSnackBarModule, MatMenuModule, MatProgressSpinnerModule, MatDatepickerModule,
+    MatSnackBarModule, MatProgressSpinnerModule, MatDatepickerModule,
     MatAutocompleteModule, MatTableModule, MatDialogModule, MatTabsModule,
     MatTooltipModule, MatSelectModule, MatPaginatorModule, MatChipsModule,
     MatButtonToggleModule, MatSlideToggleModule, MatBadgeModule, MatCheckboxModule,
-    MatExpansionModule, DragDropModule, MatSortModule,MatFormFieldModule
+    MatExpansionModule, DragDropModule, MatSortModule,MatFormFieldModule,
+    MatBottomSheetModule,MatStepperModule,MatDividerModule,MatGridListModule,
+    MatNativeDateModule, MatRippleModule,MatRadioModule,MatSliderModule,MatTreeModule,
+    FormsModule,ReactiveFormsModule
+
   ]
 })
 export class MaterialModule {

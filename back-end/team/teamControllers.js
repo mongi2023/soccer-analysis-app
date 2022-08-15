@@ -83,6 +83,8 @@ const getTeamByIdController = async (req, res) => {
     throw new CustomError.UnauthenticatedError('You are not authorized!');
   }
   const team = await getTeamByIdService(team_id, userId);
+  console.log('erer',`${team}`);
+
   if (!team) {
     throw new CustomError.NotFoundError(
       `There is no team with the id : ${team_id}`

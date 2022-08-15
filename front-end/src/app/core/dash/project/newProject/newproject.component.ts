@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
-import { findIndex } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { TeamService } from '../../match/team.service';
 import { NewprojectService } from './newproject.service';
 import { Project } from './project';
 
@@ -19,26 +20,31 @@ let descriptions: string[]
   styleUrls: ['./newproject.component.css'],
 })
 export class NewProjectComponent implements OnInit {
-  displayedColumns: string[] = [ 'ProjectName','Description' ,'ProjectPath','Action'];
+  displayedColumns: string[] = [ 'ProjectName','Description' ,'Actions'];
   dataSource!: MatTableDataSource<Project>;
-
+  
   @ViewChild(MatPaginator) paginator!: MatPaginator ;
   @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild('editCompanyModal') editCompanyModal!: TemplateRef<any>;
+  private editCompanyDialogRef!: MatDialogRef<TemplateRef<any>>;
+  
   errMsg!:string
   project!: Project
-  show2=true
+  show=true
   path2!:string
   projects!:Project[];
   projects2!:any;
+  id!:any
   projectForm= new FormGroup({
-
       name: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required]),
-      project_path:new FormControl('', [Validators.required])
     });
 
   fileOutput: any;
-  constructor(private newProjectService: NewprojectService,private router:Router,public formBuilder: FormBuilder) {
+  constructor(private newProjectService: NewprojectService
+    ,private router:Router,public formBuilder: FormBuilder,
+    public dialog: MatDialog
+    ) {
 
      this.formBuilder.group(this.projectForm)
 
@@ -61,6 +67,7 @@ export class NewProjectComponent implements OnInit {
   }
  
   ngOnInit(): void {
+
     this.getAllProjectController()
   }
 
@@ -77,13 +84,12 @@ export class NewProjectComponent implements OnInit {
      this.projects= Object.values(data)
 
      this.projects2=this.projects[0]
-     names2=this.projects2['name']
      names2=this.projects2.map((x:any)=>x.name)
      paths=this.projects2.map((x:any)=>x.project_path)
 
      descriptions=this.projects2.map((x:any)=>x.description)
 
-     const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
+     //const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
     
      this.dataSource = new MatTableDataSource(this.projects2);
      this.dataSource.paginator = this.paginator;
@@ -95,7 +101,6 @@ export class NewProjectComponent implements OnInit {
     })
   }
 
- 
 
   onChange(event:any) {
     var file = event.target.files[0];
@@ -114,28 +119,45 @@ export class NewProjectComponent implements OnInit {
 }
 }
 
-startProject(path:string,id:string,i:number){
+startProject(path:string,id:string,id_team:string){
 
-    
- 
   localStorage.setItem('path',path)
   localStorage.setItem('id_project',id)
+  localStorage.setItem('team_id',id_team)
   console.log( localStorage.getItem('path'));
   console.log( localStorage.getItem('id_project'));
+  console.log( localStorage.getItem('userId'));
 
- 
-  
-  
-  this.router.navigate(['/dash/project/upload'])}
+  this.router.navigate(['/dash/project/upload'])
+}
+
+deleteProjectController(id:string){
+  this.newProjectService.deleteProjectService(id).subscribe(data=>{
+    console.log(data);
+    this.getAllProjectController()
+    
+  })
 }
 
 
-function createNewUser(id: number): Project {
+openCompanyDetailsDialog(): void {
+  const dialogConfig = new MatDialogConfig();
+  dialogConfig.restoreFocus = false;
+  dialogConfig.autoFocus = false;
+  dialogConfig.role = 'dialog';
+  this.projectForm= new FormGroup({
+    name: new FormControl('', [Validators.required]),
+    description: new FormControl('', [Validators.required]),
+  });
+  this.editCompanyDialogRef = this.dialog.open(this.editCompanyModal, dialogConfig);
+  this.editCompanyDialogRef.afterClosed().subscribe(result => {
+    console.log('The dialog was closed...');
+  
+  });
+}
 
-return {
+closeCompanyDetailsDialog() {
+  this.editCompanyDialogRef.close();
 
-    name: names2[Math.round(Math.random() * (names2.length - 1))],
-    description:descriptions[Math.round(Math.random() * (descriptions.length - 1))],
-    project_path: paths[Math.round(Math.random() * (paths.length - 1))]
-  };
+}
 }

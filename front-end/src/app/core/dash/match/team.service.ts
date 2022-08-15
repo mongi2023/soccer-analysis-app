@@ -14,12 +14,12 @@ export class TeamService {
  // {...this.videoData,project,user,path,origin:'local'}
   constructor(private _http:HttpClient) { }
 
-  teamService(team:Team):Observable<Team>{
-
-    let project=localStorage.getItem('id_project')
-    let user=localStorage.getItem('userId')
-    let path=localStorage.getItem('path')
+  AddteamService(team:Team):Observable<Team>{
  
     return  this._http.post<Team>(this.baseAPI+'/team',team)
+    }
+
+    getTeamByIdService(id:string):Observable<Team>{
+      return this._http.get<Team>(`${this.baseAPI}/team/${id}`)
     }
 }

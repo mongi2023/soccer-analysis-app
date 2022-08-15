@@ -16,9 +16,10 @@ const {
             number,
             picture,
             position,
-            team
+            team,
+            project
         } = req.body
-        if(!fullname || !birth_date || !number || !picture || !position || !team) {
+        if(!fullname || !birth_date || !number || !picture || !position || !team || !project ) {
             throw new CustomError.BadRequestError('All fields are required, Please provide all player data')
         }
         // * Getting the userId
@@ -31,7 +32,7 @@ const {
         if(!isTeamBelongsToConnectedUser){
             throw new CustomError.NotFoundError('This team does not exist, please check again!')
         }
-        const player = await createPlayerService({fullname, birth_date, number, picture, position, team, user})
+        const player = await createPlayerService({fullname, birth_date, number, picture, position, team, project,user})
         res.status(StatusCodes.CREATED).send({msg: 'Player created successfully!'})
     }
     
@@ -53,9 +54,9 @@ const {
     const updatePlayerController = async(req, res) => {
         const {
             params: {id: player_id},
-            body: {fullname,birth_date, number, picture,position,team}
+            body: {fullname,birth_date, number, picture,position,team,project}
         } = req
-        if(!fullname || !birth_date || !number || !picture || !position || !team) {
+        if(!fullname || !birth_date || !number || !picture || !position || !team || !project) {
             throw new CustomError.BadRequestError('Fields should be filled')
         }
         const player = await updatePlayerService(player_id, req.body)

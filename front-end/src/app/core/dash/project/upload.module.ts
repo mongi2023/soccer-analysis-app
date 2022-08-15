@@ -14,7 +14,7 @@ import { MaterialModule } from 'src/app/shared/material/material.module';
   declarations: [
     NewProjectComponent,
     UploadComponent,
-    ProgressComponent
+    ProgressComponent,
   ],
   imports: [
     CommonModule,

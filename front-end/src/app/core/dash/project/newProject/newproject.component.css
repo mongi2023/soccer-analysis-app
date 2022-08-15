@@ -126,3 +126,10 @@ td, th {
 .tt{
   color: #24B1CC;
 }
+.position{
+  float: right;
+ margin-top: -6%;
+
+
+}
+/* mat-dialog-container ng-tns-c199-6 ng-trigger ng-trigger-dialogContainer ng-star-inserted */

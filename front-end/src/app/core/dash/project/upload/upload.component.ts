@@ -68,7 +68,6 @@ export class UploadComponent implements OnInit {
       .post<any>(`http://localhost:3000/api/v1/upload-video/${project}`, formData)
       .subscribe((data) => {
         console.log('datta====',data);
-        
         this.videoData = data;
         this.videoData2 = data;
         console.log('dat===>',this.videoData2);

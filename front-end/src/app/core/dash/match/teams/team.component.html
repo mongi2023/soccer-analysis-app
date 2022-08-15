@@ -12,47 +12,31 @@
                   <span>Team</span>
               </p>
           </div>
-              <form action="" class="contact-form" autocomplete="none" [formGroup]="teamForm" (ngSubmit)="teamController()">
+              <form  class="contact-form"  [formGroup]="teamForm" (ngSubmit)="AddteamController()">
                   <div class="input-control input-2">
 
-                      <input formControlName="name" type="text" required placeholder="Name" autocomplete="none">
+                      <input formControlName="name" type="text"  placeholder="Name" >
 
-                      <div class="error" data-error="Name cannot be empty"></div>
+                      <div class="error" ></div>
 
 
                   </div>
                   <div class="input-control input-2">
                   
-                    <input formControlName="creation_date" type="date" required placeholder="creation date" autocomplete="none">
+                    <input formControlName="creation_date" type="date"  placeholder="creation date" >
 
-                    <div class="error" data-error="Birth Day cannot be empty"></div>
-
+                    <div class="error" ></div>
 
                 </div>
                 <div class="input-control input-2">
 
-                  <input formControlName="logo" type="text" required placeholder="logo" autocomplete="none">
+                  <input formControlName="logo" type="text" required placeholder="logo" >
 
-                  <div class="error" data-error="Number cannot be empty"></div>
+                  <div class="error" ></div>
 
 
               </div>
-               
-              
-                  <div class="input-control input-2">
-
-                      <input  type="text" formControlName="user" required placeholder="user"
-                           autocomplete="none">
-
-                      <div class="error" data-error="Picture cannot be empty" ></div>
-
-                  </div>
-
-
-                 
-
-
-                  <div class="btn">
+                       <div class="btn">
                       <button type="submit" id="submit">SUBMIT</button>
                   </div>
                 
@@ -61,3 +45,4 @@
       </div>
   </div>
 </main>
+
