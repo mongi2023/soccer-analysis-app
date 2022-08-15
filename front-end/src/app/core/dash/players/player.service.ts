@@ -14,4 +14,8 @@ export class PlayerService {
   AddPlayerService(player:Player):Observable<Player>{
     return  this._http.post<Player>(this.baseAPI+'/player',player)
     }
+
+   getPlayerByTeamService(id:string){
+    return this._http.get<any>(`${this.baseAPI}/player/:${id}`)
+   }
 }

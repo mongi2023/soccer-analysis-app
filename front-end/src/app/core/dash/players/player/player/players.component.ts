@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { TeamService } from '../../../match/team.service';
 import { Player } from '../../player';
 import { PlayerService } from '../../player.service';
 
@@ -20,21 +19,20 @@ export class PlayersComponent implements OnInit {
     picture: new FormControl('', [Validators.required]),
     position: new FormControl('', [Validators.required]),
 
-
   });
-  constructor(private playerService:PlayerService,private teamService: TeamService,public formBuilder: FormBuilder,private router:Router) { 
+  constructor(private playerService:PlayerService,public formBuilder: FormBuilder,private router:Router) { 
     this.formBuilder.group(this.playerForm)
 
   }
 
   ngOnInit(): void {
-  this.getTeamByIdController()
+
   }
 
-  getTeamByIdController(){
+  getPlayerByIdTeamController(){
     console.log(`${localStorage.getItem('userId')}`);
      
-      this.teamService.getTeamByIdService( `${localStorage.getItem('userId')}`
+      this.playerService.getPlayerByTeamService( `${localStorage.getItem('userId')}`
       ).subscribe(data=>{
      console.log(data);
      
@@ -47,14 +45,13 @@ export class PlayersComponent implements OnInit {
     let project=localStorage.getItem('id_project')
     let user=localStorage.getItem('userId')
     let team='62f6246bfcb19a5bcea7aeeb'
- console.log({...this.playerForm.value,project,user});
+    console.log({...this.playerForm.value,project,user});
  
     this.playerService.AddPlayerService({...this.playerForm.value,project,user,team}).subscribe(data=>{
       console.log(data);
      // localStorage.setItem('userId',Object.values(data)[0].userId)
       alert('Player Added successfully')
       })
-      
-    }
+      }
   
 }
