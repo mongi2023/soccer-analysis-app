@@ -38,7 +38,9 @@ const {
     
     const getPlayerByIdController = async(req, res) => {
         const player_id = req.params.id
-        const player = await getPlayerByIdService(player_id)
+        const user = req.user.userId
+        const player = await getPlayerByIdService(player_id, user)
+        
         if(!player) {
             throw new CustomError.NotFoundError('No player with this id')
         }
