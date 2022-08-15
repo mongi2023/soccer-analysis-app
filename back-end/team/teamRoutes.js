@@ -9,9 +9,8 @@ createTeamController,
 
 const authenticateUser = require('../middlewares/authentication')
 
-
 teamRouter.route('/').post(authenticateUser, createTeamController)
-teamRouter.route('/teams-list').post(authenticateUser, getTeamsController)
+teamRouter.route('/teams-list/:id').post(authenticateUser, getTeamsController)
 teamRouter.route('/:id').get(authenticateUser, getTeamByIdController).patch(authenticateUser, updateTeamController)
 teamRouter.route('/:id/players').get(authenticateUser, getPlayersOfTeamController)
 

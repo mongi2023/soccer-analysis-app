@@ -16,6 +16,7 @@ export class AuthInterceptor implements HttpInterceptor {
     request = request.clone({
       withCredentials:true
     })
+
       request = request.clone({
         headers: request.headers.set('Content-Type', 'application/json')
       });

@@ -42,7 +42,7 @@ app.use(express.urlencoded({extended: false}))
 app.use(cookieParser(process.env.JWT_SECRET))
 
 // ! USING CORS
-app.use(cors({origin: 'http://localhost:4200', credentials: true}))
+app.use(cors({origin: 'http://localhost:4200' , credentials: true}))
 
 // !ROUTES USES
 

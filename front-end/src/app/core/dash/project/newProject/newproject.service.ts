@@ -8,6 +8,7 @@ const httpoptions = {
     (
       {
         'Content-Type': 'application/json'
+
       })
 }
 @Injectable({
@@ -34,6 +35,11 @@ export class NewprojectService {
   updateProjectService(id:string, params: any):Observable<any>{
     return this.http.patch<Project>(`${this.baseApi}/projects/${id}`,params)
   }
+
+  getAllTeamsService(project:string):Observable<any>{
+    
+    return this.http.post<any>('http://localhost:3000/api/v1/team/teams-list/'+project,httpoptions)
+   }
 
 
 }

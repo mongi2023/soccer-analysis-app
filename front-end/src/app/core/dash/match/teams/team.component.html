@@ -16,7 +16,10 @@
                   <div class="input-control input-2">
 
                       <input formControlName="name" type="text"  placeholder="Name" >
-
+                      <small class="text-danger"
+                      *ngIf="errMsg">
+                      {{errMsg}}
+                  </small>
                       <div class="error" ></div>
 
 

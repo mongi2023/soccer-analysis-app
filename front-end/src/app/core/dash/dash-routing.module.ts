@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AnalyseComponent } from './analyse/analyse.component';
+import { TeamComponent } from './match/teams/team.component';
 import { PlayersComponent } from './players/player/player/players.component';
 import { SequenceComponent } from './sequence/sequence.component';
 
@@ -14,6 +15,10 @@ const routes: Routes = [
   {
     path:'players',component:PlayersComponent
   },
+  {
+    path:'players/:id',component:PlayersComponent
+  },
+  
   {
     path: 'project',
     loadChildren: () => import('./project/upload.module').then(m => m.UploadModule)

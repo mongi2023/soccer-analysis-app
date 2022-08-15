@@ -12,6 +12,7 @@ import { TeamService } from '../team.service';
 })
 export class TeamComponent implements OnInit {
   team!:Team
+  errMsg!:any
   teamForm= new FormGroup({
     name: new FormControl('', [Validators.required]),
     creation_date: new FormControl('', [Validators.required]),
@@ -29,7 +30,6 @@ export class TeamComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
   
   }
 
@@ -43,8 +43,13 @@ console.log({...this.teamForm.value,user});
       console.log(data);
       alert('Team Added Successfully')
       
-      })
+      },error=>{
+        this.errMsg=error.error.msg
+        console.log(this.errMsg);
+        
+        })
       
     }
+
   
 }

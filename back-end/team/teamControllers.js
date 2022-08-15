@@ -62,18 +62,21 @@ const createTeamController = async (req, res) => {
  * @param {*} res
  */
 const getTeamsController = async (req, res) => {
-  const project = req.body.project;
+  const project = req.params.id;
   const userId = req.user.userId;
-
+console.log(project,userId);
   const doesProjectExist = await getProjectByIdService(project, userId);
+
   if (!doesProjectExist) {
     throw new CustomError.NotFoundError('The project does not exist');
   }
   const teams = await getTeamsService(project, userId);
+
   //  ! TODO : NEEDS A CORRECTION IMMEDIATELY
   //   if(!teams[0].user.equals(userId)){
   //     throw new CustomError.NotFoundError('No team')
   //   }
+ // console.log(teams);
   res.status(StatusCodes.OK).send({ teams: teams });
 };
 
@@ -91,6 +94,7 @@ const getTeamByIdController = async (req, res) => {
       `There is no team with the id : ${team_id}`
     );
   }
+
   res.status(StatusCodes.OK).send({ team: team });
 };
 

@@ -43,7 +43,7 @@ export class NewProjectComponent implements OnInit {
   fileOutput: any;
   constructor(private newProjectService: NewprojectService
     ,private router:Router,public formBuilder: FormBuilder,
-    public dialog: MatDialog
+    public dialog: MatDialog,private teamService:TeamService
     ) {
 
      this.formBuilder.group(this.projectForm)
@@ -119,17 +119,30 @@ export class NewProjectComponent implements OnInit {
 }
 }
 
-startProject(path:string,id:string,id_team:string){
+
+
+startProject(path:string,id:string){
 
   localStorage.setItem('path',path)
   localStorage.setItem('id_project',id)
-  localStorage.setItem('team_id',id_team)
-  console.log( localStorage.getItem('path'));
+  //localStorage.setItem('team_id',id_team)
   console.log( localStorage.getItem('id_project'));
-  console.log( localStorage.getItem('userId'));
-
-  this.router.navigate(['/dash/project/upload'])
+  //console.log( localStorage.getItem('team_id'));
+  this.getTeamsController()
+//  this.router.navigate(['/dash/project/upload'])
 }
+getTeamsController(){
+  var project3= `${localStorage.getItem('id_project')}`
+  console.log('id===',project3);
+
+  this.newProjectService.getAllTeamsService(project3).subscribe(data=>{
+    console.log(data.teams.map((x:any)=>x._id));
+   // localStorage.setItem('id_team',data)
+
+      })
+}
+
+
 
 deleteProjectController(id:string){
   this.newProjectService.deleteProjectService(id).subscribe(data=>{
