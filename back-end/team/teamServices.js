@@ -11,9 +11,9 @@ const getTeamsService = (project, user) => {
 }
 
 const getTeamByIdService = (id, user) => {
-    const team = Team.findOne({_id:id, user: user})
-    return team
+    return Team.findOne({_id:id, user: user})
 }
+
 // ! find the team with the specific name
 // ? check if the id of the project equals to the objects gotten by the name
 

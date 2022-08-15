@@ -1,3 +1,4 @@
+const Team  = require('./teamModel')
 const { StatusCodes } = require('http-status-codes');
 const { getPlayersTeamService } = require('../player/playerServices');
 const { getProjectByIdService } = require('../project/projectServices');
@@ -130,15 +131,12 @@ const getPlayersOfTeamController = async(req, res) => {
     params: {id: team_id},
     user: {userId}
   } = req
-  console.log(team_id, userId)
   const doesTeamBelongsToConnctedUser = await getTeamByIdService(team_id, userId)
-  console.log("TEAM : ",doesTeamBelongsToConnctedUser)
   if(!doesTeamBelongsToConnctedUser){
     throw new CustomError.NotFoundError('This team does not exist')
   }
-  const players = await getPlayersTeamService(team_id, userId)
-
-  res.status(StatusCodes.OK).send({players: players})
+  const squad = await getTeamByIdService(team_id, userId).populate('players')
+  res.status(StatusCodes.OK).send({players: squad})
 }
 
 module.exports = {
