@@ -14,10 +14,7 @@ const PATH = './uploads';
   let upload = multer({
     storage: storage,
   });
-
-
-
-  
+ 
 module.exports = {
 upload
 }

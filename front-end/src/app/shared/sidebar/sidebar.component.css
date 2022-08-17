@@ -54,16 +54,19 @@ a:focus {
     SIDEBAR STYLE
 ----------------------------------------------------- */
 
+.position{
+    margin-left: 65px !important;
+}
 
 
 .sidebar {
     min-width: 250px;
     max-width: 250px;
-    background: #7386D5;
+    background: #3F51B5;
     color: #fff;
     transition: all 0.3s;
     float: left;
-    border-radius: 5px 5px 5px 5px;
+    border-radius: 0px 0px 5px 5px;
     min-height: 1200px !important;
     margin-bottom: 0px !important;
 
@@ -75,7 +78,7 @@ a:focus {
 
 .sidebar .sidebar-header {
     padding: 20px;
-    background: #6d7fcc;
+    background: #3F51B5;
     border-radius: 7px 7px 7px 7px ;
 
 }

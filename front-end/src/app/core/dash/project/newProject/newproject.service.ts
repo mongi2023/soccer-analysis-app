@@ -38,7 +38,7 @@ export class NewprojectService {
 
   getAllTeamsService(project:string):Observable<any>{
     
-    return this.http.post<any>('http://localhost:3000/api/v1/team/teams-list/'+project,httpoptions)
+    return this.http.post<any>('http://localhost:3000/api/v1/team/teams-list/',{project},httpoptions)
    }
 
 

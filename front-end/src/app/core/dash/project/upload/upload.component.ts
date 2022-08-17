@@ -54,7 +54,6 @@ export class UploadComponent implements OnInit {
 
   onSubmit() {
     const formData = new FormData();
-
     formData.append('video', this.videos);
   // fsExtra.copyFileSync(pathOrigin, `${pathDest}`);
    let project=localStorage.getItem('id_project')

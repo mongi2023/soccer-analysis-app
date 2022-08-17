@@ -133,9 +133,49 @@ const upload= multer({storage: multer.diskStorage({
   },
 })}).single('video');
 
+const uploadLogo= multer({storage: multer.diskStorage({
 
+  destination:async (req, file, cb) => {
+
+   //const project =  (await getProjectByIdService2(req.params.id).select('project_path')).project_path
+
+    cb(null, './images');
+
+  },
+  filename: (req, file, cb) => {
+
+    cb(null, file.originalname);
+  },
+})}).single('logo');
+
+const uploadLogoController = async (req, res,next) => {
+
+  const project_id = req.params.id;
+  const project = await getProjectByIdService2(project_id);
+ // const info=  await ffprobe(`${project.project_path}/${req.file.originalname}`, { path: ffprobeStatic.path })
+
+//  const dur = info.streams[0].duration;
+ // const formatted = moment.utc(dur * 1000).format("HH:mm:ss");
+  
+  if (!project) throw new CustomError.NotFoundError("NOT FOUND");
+  if(!project_id) throw new CustomError.BadRequestError('missing ID')
+  if (!req.file) {
+   const error = new  Error('No File !')
+   error.httpStatusCode=400
+    console.log("No file is available!");
+    return next(error)
+  }
+  if(req.file){
+    console.log("File is available!");
+    return res.send({
+     msg:'logo uploaded'
+
+  });
+  
+}}
 module.exports = {
-  upload,
+  upload,uploadLogo,
+  uploadLogoController,
   uploadVideoController,
   udpateVideoInfoController,
   createVideoController,

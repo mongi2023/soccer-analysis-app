@@ -62,7 +62,7 @@ const createTeamController = async (req, res) => {
  * @param {*} res
  */
 const getTeamsController = async (req, res) => {
-  const project = req.params.id;
+  const project = req.body.project;
   const userId = req.user.userId;
 console.log(project,userId);
   const doesProjectExist = await getProjectByIdService(project, userId);
@@ -142,6 +142,9 @@ const getPlayersOfTeamController = async(req, res) => {
   const squad = await getTeamByIdService(team_id, userId).populate('players')
   res.status(StatusCodes.OK).send({players: squad})
 }
+
+
+
 
 module.exports = {
   createTeamController,

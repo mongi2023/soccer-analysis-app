@@ -2,7 +2,8 @@ const {
     createPlayerService,
         getPlayerByIdService,
         getPlayersService,
-        updatePlayerService
+        updatePlayerService,
+        checkPlayerNumberService
     } = require('./playerServices')
     const {StatusCodes} = require('http-status-codes')
     const CustomError = require('../shared-services/errors')
@@ -21,6 +22,13 @@ const {
         } = req.body
         if(!fullname || !birth_date || !number || !picture || !position || !team || !project ) {
             throw new CustomError.BadRequestError('All fields are required, Please provide all player data')
+        }
+        const isNumberExist = await checkPlayerNumberService(number)
+        if(isNumberExist.team === team){
+
+            if(isNumberExist){
+                throw CustomError.BadRequestError('Please choose another number as this number exists')
+            }
         }
         // * Getting the userId
         const user = req.user.userId

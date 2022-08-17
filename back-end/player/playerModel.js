@@ -14,7 +14,7 @@ const PlayerSchema = new mongoose.Schema({
     number: {
         type: Number,
         required: [true, 'You have to enter the player number'],
-        unique: true
+       
     },
     picture: {
         type: String,

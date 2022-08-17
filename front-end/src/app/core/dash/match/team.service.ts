@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -17,6 +17,7 @@ const httpoptions = {
 export class TeamService {
 
   baseAPI=environment.baseURL
+  selectedFile !: File ;
 
  // {...this.videoData,project,user,path,origin:'local'}
   constructor(private _http:HttpClient) { }
@@ -29,10 +30,6 @@ export class TeamService {
     getTeamByIdService(id:string):Observable<Team>{
       return this._http.get<Team>(`${this.baseAPI}/team/${id}`)
     }
-    getAllTeamsService(project:string):Observable<any>{
-      console.log(project);
-      
-      return this._http.post<any>('http://localhost:3000/api/v1/team/teams-list',project,httpoptions)
-     }
+  
 
 }

@@ -17,6 +17,9 @@ const getPlayersService = (userId) => {
     const players = Player.find({user: userId})
     return players
 }
+const checkPlayerNumberService = (number) => {
+    return Player.findOne({number})
+}
 
 const updatePlayerService = (id,userId, data) => {
     const player = Player.findOneAndUpdate({_id: id, user: userId}, data, {new: true, runValidators: true})
@@ -36,5 +39,6 @@ module.exports = {
     getPlayerByIdService,
     getPlayersService,
     updatePlayerService,
-    getPlayersTeamService
+    getPlayersTeamService,
+    checkPlayerNumberService
 }

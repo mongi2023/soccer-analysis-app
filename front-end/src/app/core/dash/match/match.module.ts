@@ -6,6 +6,7 @@ import { TeamComponent } from './teams/team.component';
 import { MatchDetailsComponent } from './match-details/matchDetails.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
+import { MaterialModule } from 'src/app/shared/material/material.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,9 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     MatchRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MaterialModule.forRoot(),
+
   ]
 })
 export class MatchModule { }

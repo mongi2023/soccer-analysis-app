@@ -1,83 +1,67 @@
-<main class="main">
-  <div class="container">
-      <div class="content">
-          <div class="word">
-              <h2>Learn to code by watching others</h2>
-              <p>See how experienced developers solve problems in real-time. Watching scripted tutorials is
-                  great, but understanding how developers think is invaluable.</p>
-          </div>
-          <div class="form">
-            <div class="ad">
-              <p>Try it free 7 days
-                  <span>then $20/mo. thereafter</span>
-              </p>
-          </div>
-              <form action="" class="contact-form" autocomplete="none" [formGroup]="playerForm" (ngSubmit)="AddPlayerController()">
-                  <div class="input-control input-2">
 
-                      <input formControlName="fullname" type="text"  placeholder="Full Name" autocomplete="none">
-
-                      <div class="error" data-error="Full Name cannot be empty"></div>
-                      <small class="text-danger"
-                      *ngIf="errMsg">
-                      {{errMsg}}
-                  </small>
-
-                  </div>
-                  <div class="input-control input-2">
-
-                    <input formControlName="birth_date" type="date"  placeholder="Birth Day" autocomplete="none">
-
-                    <div class="error" data-error="Birth Day cannot be empty"></div>
-
-
-                </div>
-                <div class="input-control input-2">
-
-                  <input formControlName="number" type="number"  placeholder="Number" autocomplete="none">
-                  <small class="text-danger"
-                  *ngIf="errMsg">
-                  {{errMsg}}
-              </small>
-                  <div class="error" data-error="Number cannot be empty"></div>
-
-
-              </div>
-                  <div class="input-control input-2">
-
-
-
-                      <input type="text" formControlName="position"  placeholder="Position" autocomplete="none">
-                      <div class="error" data-error="Position cannot be empty" ></div>
-
-                  </div>
-                  <div class="input-control input-2">
-
-                      <input formControlName="picture"  type="text"  placeholder="Picture"
-                           autocomplete="none">
-
-                      <div class="error" data-error="Picture cannot be empty" ></div>
-
-                  </div>
-
-                  <mat-form-field appearance="fill">
-                    <mat-label>Teams</mat-label>
-                    <mat-select >
-                      <mat-option *ngFor="let t of teams; let i=index" [value]="t._id" (click)="getid(i)">
-                        
-                        {{t.name}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        &nbsp;&nbsp;	<mat-icon><img src="{{t.logo}}" width="30"></mat-icon>
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                  
-
-                  <div class="btn">
-                      <button id="submit" type="submit">SUBMIT</button>
-                  </div>
-                
-              </form>
-          </div>
+<div class="container">
+    <div class="row">
+      <div class="col-sm">
       </div>
+      <div class="col-6">
+        <form action="" class="contact-form" autocomplete="none" [formGroup]="playerForm" (ngSubmit)="AddPlayerController()">
+
+            <mat-card >
+        <p>
+            <mat-form-field appearance="outline" [hideRequiredMarker]="true">
+                <mat-label>Player Name</mat-label>
+                <input formControlName="fullname"  type="text" matInput placeholder="Enter your name">
+              </mat-form-field>
+          </p>
+          <p>
+            <mat-form-field appearance="outline" [hideRequiredMarker]="true">
+                <mat-label>Birth Date</mat-label>
+                <input formControlName="birth_date" type="date" matInput placeholder="Enter Birth Date">
+              </mat-form-field>
+          </p>
+          
+          <p>
+            <mat-form-field appearance="outline" [hideRequiredMarker]="true">
+                <mat-label>Picture</mat-label>
+                <input    type="text" 
+                 matInput >
+                 <input formControlName="picture" (change)="selectVideo($event)" type="file" id="upload">
+              </mat-form-field>
+          </p>
+        
+          <p>
+            <mat-form-field appearance="outline" [hideRequiredMarker]="true">
+                <mat-label>Position</mat-label>
+                <input  formControlName="position" type="text" matInput placeholder="Enter position">
+              </mat-form-field>
+          </p>
+          <p>
+            <mat-form-field appearance="outline" [hideRequiredMarker]="true">
+                <mat-label>Number</mat-label>
+                <input  formControlName="number" type="number" matInput placeholder="Enter number">
+              </mat-form-field>
+          </p>
+          <div>
+          <mat-form-field appearance="outline" [hideRequiredMarker]="true">
+            <mat-label>Teams</mat-label>
+            <mat-select >
+              <mat-option *ngFor="let t of teams; let i=index" [value]="t._id" (click)="getid(i)">
+                
+                {{t.name}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;	<mat-icon><img src="" width="30"></mat-icon>
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        
+          <div><button type="submit" mat-raised-button color="primary">Submit</button></div>
+        
+        </mat-card>
+            </form>      </div>
+      <div class="col">
+      </div>
+    </div>
+ 
   </div>
-</main>
+
+

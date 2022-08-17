@@ -1,37 +1,38 @@
-<div class="container">
-	<div class="screen">
-		<div class="screen__content">
 
-			<form class="login" [formGroup]="loginForm" (ngSubmit)="loginController()">
-				<div class="login__field">
-					<i class="login__icon fas fa-user"></i>
-					<input type="text" class="login__input" formControlName="email" placeholder="User name / Email">
-				</div>
-				<div class="login__field">
-					<i class="login__icon fas fa-lock"></i>
-					<input type="password" class="login__input"formControlName="password" placeholder="Password">
-				</div>
+<form class="login" [formGroup]="loginForm" (ngSubmit)="loginController()">
 
-				
-				<button type="submit" class="button login__submit">
-					<span class="button__text">Log In Now</span>
-					<i class="button__icon fas fa-chevron-right"></i>
-				</button>				
-			</form>
-			<div class="social-login">
-				<h3>log in via</h3>
-				<div class="social-icons">
-					<a href="#" class="social-login__icon fab fa-instagram"></a>
-					<a href="#" class="social-login__icon fab fa-facebook"></a>
-					<a href="#" class="social-login__icon fab fa-twitter"></a>
-				</div>
-			</div>
-		</div>
-		<div class="screen__background">
-			<span class="screen__background__shape screen__background__shape4"></span>
-			<span class="screen__background__shape screen__background__shape3"></span>		
-			<span class="screen__background__shape screen__background__shape2"></span>
-			<span class="screen__background__shape screen__background__shape1"></span>
-		</div>		
+<div class="form-wraper">
+	<div class="form-container card">
+	  <div class="form-header">
+		<img src="./../../assets/car-key.svg"  class="main-lock-icon" alt="">
+	  </div>
+  
+	  <div class="form-body">
+		<mat-form-field class="justifier">
+			<input matInput placeholder="Email" type="email"  formControlName="email" text="email" class="form-input">
+
+		</mat-form-field>
+		<mat-form-field class="justifier">
+			<input matInput placeholder="Password" type="password"  formControlName="password" text="password" class="form-input">
+		</mat-form-field>
+	  </div>
+  
+	  <div class="form-footer">
+		  <button mat-raised-button class="btn custom-btn"> 
+			<mat-icon>input</mat-icon>
+			Login
+		  </button>
+		  <div class="txt">
+			OR
+		  </div>
+		  <button mat-raised-button class="btn"> 
+			<img src="./../../assets/search.svg" alt="" class="google-icon"> Login With Google
+		  </button>
+	  </div>
+	  <div class="additional-link">
+		<a routerLink="/signup">No Account? <strong>Create one here</strong></a>
+	  </div>
 	</div>
-</div>
+  </div>
+</form>
+  
