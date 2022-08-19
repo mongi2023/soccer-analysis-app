@@ -24,12 +24,17 @@ export class TeamService {
 
   AddteamService(team:Team):Observable<Team>{
  
-    return  this._http.post<Team>(this.baseAPI+'/team',team)
+    return  this._http.post<Team>(this.baseAPI+'/team',team,httpoptions)
     }
 
     getTeamByIdService(id:string):Observable<Team>{
       return this._http.get<Team>(`${this.baseAPI}/team/${id}`)
     }
-  
+    
+    getAllTeamsService(project:string):Observable<any>{
+    
+      return this._http.post<any>('http://localhost:3000/api/v1/team/teams-list/',{project},httpoptions)
+     }
+
 
 }

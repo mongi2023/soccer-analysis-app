@@ -139,7 +139,7 @@ const uploadLogo= multer({storage: multer.diskStorage({
 
    //const project =  (await getProjectByIdService2(req.params.id).select('project_path')).project_path
 
-    cb(null, './images');
+    cb(null, 'E:\\Workspace\\PROJET_SPORT\\soccer-analysis-app\\soccer-analysis-app\\front-end\\src\\assets\\img\\');
 
   },
   filename: (req, file, cb) => {

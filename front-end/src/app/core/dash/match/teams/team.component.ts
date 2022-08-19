@@ -73,13 +73,14 @@ export class TeamComponent implements OnInit {
     const file = event.target.files[0];
     //localStorage.removeItem('')
    var input = <HTMLInputElement>document.getElementById('upload');
-     var in2 = input.value.replace('C:\\fakepath\\', 'E:\\Workspace\\PROJET_SPORT\\soccer-analysis-app\\soccer-analysis-app\\back-end\\images\\');
+     var in2 = input.value.replace('C:\\fakepath\\', 'assets/img/');
     if (event.target.files.length > 0) {
       reader.readAsDataURL(file);
       reader.onload = (event) => {
         this.url = (<FileReader>event.target).result;
         this.logos = file;
-        this.teamForm.value.logo = in2;      };
+        this.teamForm.value.logo = in2;   
+         };
     }
   }
   // onSubmit() {
@@ -109,10 +110,10 @@ export class TeamComponent implements OnInit {
     console.log(project);
 
   
-    console.log({ ...this.teamForm.value, user, project });
+    console.log({ ...this.teamForm.value, project });
     
     this.teamService
-      .AddteamService({ ...this.teamForm.value, user, project })
+      .AddteamService({ ...this.teamForm.value, project })
       .subscribe(
         (data) => {
           this._http.post<any>(
@@ -124,7 +125,7 @@ export class TeamComponent implements OnInit {
         },
         (error) => {
           this.errMsg = error.error.msg;
-          console.log(this.errMsg);
+        //  console.log(this.errMsg);
         }
       );
   }

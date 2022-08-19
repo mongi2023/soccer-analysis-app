@@ -3,7 +3,8 @@ const {
         getPlayerByIdService,
         getPlayersService,
         updatePlayerService,
-        checkPlayerNumberService
+        checkPlayerNumberService,
+        getPlayersTeamNumbersService
     } = require('./playerServices')
     const {StatusCodes} = require('http-status-codes')
     const CustomError = require('../shared-services/errors')
@@ -11,6 +12,7 @@ const {
     
     // FIXME : Player number should not be repeated within just the club
     const createPlayerController = async(req, res) => {
+
         const {
             fullname,
             birth_date,
@@ -20,27 +22,28 @@ const {
             team,
             project
         } = req.body
+        const user = req.user.userId
+                req.body.user = req.user.userId
         if(!fullname || !birth_date || !number || !picture || !position || !team || !project ) {
             throw new CustomError.BadRequestError('All fields are required, Please provide all player data')
         }
-        const isNumberExist = await checkPlayerNumberService(number)
-        if(isNumberExist.team === team){
+//        const isNumberExist = await checkPlayerNumberService(number)
+//        const teamNumbers = await getPlayersTeamNumbersService(team,number, user)
+//        console.log(teamNumbers)
+//        if(teamNumbers) {
+//            throw new CustomError.BadRequest('this number is already exist')
+//        }
 
-            if(isNumberExist){
-                throw CustomError.BadRequestError('Please choose another number as this number exists')
-            }
-        }
         // * Getting the userId
-        const user = req.user.userId
-        req.body.user = req.user.userId
-    
+
+        console.log(req.body)
         const isTeamBelongsToConnectedUser = await getTeamByIdService(team, user)
         console.log(isTeamBelongsToConnectedUser)
         
         if(!isTeamBelongsToConnectedUser){
             throw new CustomError.NotFoundError('This team does not exist, please check again!')
         }
-        const player = await createPlayerService({fullname, birth_date, number, picture, position, team, project,user})
+        const player = await createPlayerService({...req.body})
         res.status(StatusCodes.CREATED).send({msg: 'Player created successfully!'})
     }
     

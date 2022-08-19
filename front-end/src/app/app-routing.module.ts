@@ -11,6 +11,10 @@ const routes: Routes = [
     path: 'dash',
     loadChildren: () => import('./core/dash/dash.module').then(m => m.DashModule)
   },
+  {
+    path: 'tt',
+    loadChildren: () => import('./shared/template/template.module').then(m => m.TemplateModule)
+  },
 ];
 
 @NgModule({

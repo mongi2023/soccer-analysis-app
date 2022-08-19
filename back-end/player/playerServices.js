@@ -32,6 +32,11 @@ const getPlayersTeamService = (team, user) => {
 }
 
 
+const getPlayersTeamNumbersService = (team,number, user) => {
+    const players = Player.find({team: team,number:number ,user: user})
+    return players
+}
+
 
 
 module.exports = {
@@ -40,5 +45,6 @@ module.exports = {
     getPlayersService,
     updatePlayerService,
     getPlayersTeamService,
-    checkPlayerNumberService
+    checkPlayerNumberService,
+    getPlayersTeamNumbersService
 }

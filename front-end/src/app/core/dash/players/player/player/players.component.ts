@@ -46,17 +46,17 @@ export class PlayersComponent implements OnInit {
     var reader = new FileReader();
     const file = event.target.files[0];
     //localStorage.removeItem('')
-    var input = <HTMLInputElement>document.getElementById('upload');
-    var in2 = input.value.replace('C:\\fakepath\\', 'E:\\Workspace\\PROJET_SPORT\\soccer-analysis-app\\soccer-analysis-app\\back-end\\images\\');
-    
+   var input = <HTMLInputElement>document.getElementById('upload');
+     var in2 = input.value.replace('C:\\fakepath\\', 'assets/img/');
     if (event.target.files.length > 0) {
       reader.readAsDataURL(file);
       reader.onload = (event) => {
         this.url = (<FileReader>event.target).result;
         this.logos = file;
-        this.playerForm.value.logo = in2; 
-        //  console.log(reader.result);
-      };
+        this.playerForm.value.logo = in2;  
+        console.log(this.playerForm.value.logo);
+         
+         };
     }
   }
 
@@ -64,20 +64,23 @@ export class PlayersComponent implements OnInit {
 
   AddPlayerController(){
     const formData = new FormData();
-
+    var input = <HTMLInputElement>document.getElementById('upload');
+    var in2 = input.value.replace('C:\\fakepath\\', 'assets/img/');
+    this.playerForm.value.picture = in2;  
     formData.append('logo', this.logos);
     let project=localStorage.getItem('id_project')
-    let user=localStorage.getItem('userId')
     let team=this.idTeam
-    console.log({...this.playerForm.value,project,user,team});
- 
-    this.playerService.AddPlayerService({...this.playerForm.value,project,user,team}).subscribe(data=>{
+  
+    
+    console.log({...this.playerForm.value,project,team});
+
+    this.playerService.AddPlayerService({...this.playerForm.value,project,team}).subscribe(data=>{
       console.log(data);
      // localStorage.setItem('userId',Object.values(data)[0].userId)
      this._http.post<any>(
       `http://localhost:3000/api/v1/upload-video/logo/${project}`,formData)
     .subscribe((data) => {
-    //  console.log('datta====', data);
+    console.log('datta====', data);
     }); 
       alert('Player Added successfully')
       },error=>{
@@ -100,6 +103,7 @@ export class PlayersComponent implements OnInit {
           console.log(data.teams.map((x:any)=>x.name));
           console.log(data);
           this.teams = data.teams
+        
           
          // localStorage.setItem('id_team',data)
       
