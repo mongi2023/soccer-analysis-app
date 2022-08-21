@@ -12,25 +12,21 @@ import { FullscreenComponent } from './fullscreen/fullscreen.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../material/material.module';
+import { NgScrollbarModule } from 'ngx-scrollbar';
+import { NavbarComponent } from './navbar/navbar.component';
 
 
 @NgModule({
   declarations: [
-    UserMenuComponent,
-    ToolbarNotificationComponent,
-    ToolbarComponent,
-    SidemenuItemComponent,
-    SidemenuComponent,
-    SidebarComponent,
-    FullscreenComponent,
-    SearchBarComponent,
+  
     
   ],
   imports: [
     CommonModule,
     TemplateRoutingModule,
     ReactiveFormsModule,
-    MaterialModule.forRoot()
+    MaterialModule.forRoot(),
+    NgScrollbarModule
   ]
 })
 export class TemplateModule { }

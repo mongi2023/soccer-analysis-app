@@ -1,4 +1,6 @@
 import { Component, OnInit, Input, HostListener, ElementRef } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/core/service/auth.service';
 
 @Component({
   selector: 'cdk-user-menu',
@@ -9,11 +11,11 @@ export class UserMenuComponent implements OnInit {
 	isOpen: boolean = false;
 
   	//currentUser = null;
-  	Hari!:any;
+ 	fullname=localStorage.getItem('fullname')
   	
 
-  	@Input() currentUser = null;
-  	@HostListener('document:click', ['$event', '$event.target'])
+  	@Input() currentUser!:any;
+  	@HostListener('window:keydown.enter', ['$event', '$event.target'])
   	onClick(event: MouseEvent, targetElement: HTMLElement) {
     	if (!targetElement) {
      		return;
@@ -26,10 +28,20 @@ export class UserMenuComponent implements OnInit {
   	}
   	
     
-  	constructor(private elementRef: ElementRef) { }
-
+  	constructor(private elementRef: ElementRef,private router:Router,private authService:AuthService) { }
+    
 
   	ngOnInit() {
   	}
-
+  logOut(){
+   localStorage.removeItem('fullname')
+   localStorage.removeItem('userId')
+   localStorage.removeItem('id_project')
+   this.authService.logOutService().subscribe(data=>{
+	console.log(data);
+	
+   })
+   this.fullname=''
+   this.router.navigate(['auth/login'])
+  }
 }

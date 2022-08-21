@@ -21,4 +21,7 @@ export class AuthService {
   loginService(user:User):Observable<User>{
   return  this._http.post<User>(this.baseAPI+'/user/login',user,httpoptions)
   }
+  logOutService():Observable<User>{
+ return this._http.delete<User>(this.baseAPI+'/user/logout')
+  }
 }

@@ -6,14 +6,16 @@ const routes: Routes = [
   {
     path: 'auth',
     loadChildren: () => import('./core/auth/auth.module').then(m => m.AuthModule)
+
   },
   {
     path: 'dash',
     loadChildren: () => import('./core/dash/dash.module').then(m => m.DashModule)
   },
   {
-    path: 'tt',
+    path: '',
     loadChildren: () => import('./shared/template/template.module').then(m => m.TemplateModule)
+
   },
 ];
 

@@ -37,7 +37,6 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatTreeModule} from '@angular/material/tree';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {OverlayModule} from '@angular/cdk/overlay';
 
 @NgModule({
   declarations: [],

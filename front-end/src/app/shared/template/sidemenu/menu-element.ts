@@ -165,42 +165,42 @@ export const menus = [
     //                 ]
     // },
     {
-        'name': 'Tables',
+        'name': 'Projects',
         'icon': 'list',
         'link': false,
         'open': false,
         'chip': { 'value': 2, 'color': 'accent' },
         'sub': [
             {
-                'name': 'Fixed',
+                'name': 'New Project',
                 'icon': 'filter_list',
-                'link': 'tables/fixed',
+                'link': 'dash/project/new',
                 'open': false,
             },
             {
-                'name': 'Feature',
+                'name': 'Teams',
                 'icon': 'done_all',
-                'link': 'tables/featured',
+                'link': 'dash/match/team',
                 'open': false,
             },
             {
-                'name': 'Responsive Tables',
+                'name': 'Players',
                 'icon': 'filter_center_focus',
-                'link': 'tables/responsive',
+                'link': 'dash/players',
                 'open': false,
             }
         ]
 
     },
     {
-        'name': 'Guarded Routes',
+        'name': 'Match Details',
         'icon': 'mode_edit',
-        'link': '/auth/guarded-routes',
+        'link': 'dash/match/matchdetails',
         'open': false,
     }, {
-        'name': 'Scrumboard',
+        'name': 'Analysis',
         'open': false,
-        'link': '/auth/scrumboard',
+        'link': 'dash/analyse',
         'icon': 'grade',
     }, {
         'name': 'Applications',

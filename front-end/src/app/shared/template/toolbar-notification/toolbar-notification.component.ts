@@ -8,7 +8,7 @@ import { Component, OnInit, Input, HostListener, ElementRef } from '@angular/cor
 export class ToolbarNotificationComponent implements OnInit {
 	cssPrefix = 'toolbar-notification';
   	isOpen: boolean = false;
-  	@Input() notifications = [];
+  	@Input() notifications:any;
 
     // @HostListener('document:click', ['$event', '$event.target'])
     // onClick(event: MouseEvent, targetElement: HTMLElement) {
@@ -30,8 +30,8 @@ export class ToolbarNotificationComponent implements OnInit {
     	
   	}
 
-  	 delete(notification:any) {
+  	delete(notification:any) {
     
-  	 }
+  	}
 
 }
