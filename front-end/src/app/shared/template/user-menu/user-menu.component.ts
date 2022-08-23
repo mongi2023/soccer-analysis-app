@@ -18,6 +18,8 @@ export class UserMenuComponent implements OnInit {
   	@HostListener('window:keydown.enter', ['$event', '$event.target'])
   	onClick(event: MouseEvent, targetElement: HTMLElement) {
     	if (!targetElement) {
+			console.log('eeee');
+			
      		return;
     	}
 

@@ -14,9 +14,9 @@
 
     .avatar {
         margin-top: 10px !important;
-
         width: 30px;
         height: 30px;
+        background-color: azure;
         border-radius: 50%;
     }
 
@@ -60,4 +60,7 @@
             visibility: visible;
         }
     }
+}
+.bguser{
+  color: white;
 }

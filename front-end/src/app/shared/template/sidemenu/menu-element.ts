@@ -13,6 +13,7 @@ export const menus = [
                 'chip': false,
                 'open': true,
             }
+
         ]
     },
     {
@@ -187,6 +188,12 @@ export const menus = [
                 'name': 'Players',
                 'icon': 'filter_center_focus',
                 'link': 'dash/players',
+                'open': false,
+            },
+            {
+                'name': 'Sequences',
+                'icon': 'mode_edit',
+                'link': 'dash/sequence',
                 'open': false,
             }
         ]

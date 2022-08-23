@@ -42,9 +42,13 @@ export class AnalyseComponent implements OnInit {
     if (player.video.currentTime <= 10) {
       this.start = player.video.currentTime;
       this.end=player.video.currentTime +10
+      console.log(player.video.currentTime);
+      
     } else {
       this.start = player.video.currentTime - 10;
       this.end=player.video.currentTime +10
+      console.log(this.start);
+      console.log(this.end);
     }
   }
 

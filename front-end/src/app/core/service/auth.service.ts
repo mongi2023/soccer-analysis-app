@@ -24,4 +24,8 @@ export class AuthService {
   logOutService():Observable<User>{
  return this._http.delete<User>(this.baseAPI+'/user/logout')
   }
+  isLoggin(): boolean{
+    const user= localStorage.getItem('userId');
+    return user!= null ? true : false;
+  }
 }
