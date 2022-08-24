@@ -2,24 +2,24 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Video } from './video';
 import { VideoUploadService } from './video-upload.service';
-const httpoptions = {
-  headers: new HttpHeaders
-    (
-      {
-        'Contenet-type': 'multipart/form-data'
-      })
-}
+declare function scrip(): any;
 
+const httpoptions = {
+  headers: new HttpHeaders({
+    'Contenet-type': 'multipart/form-data',
+  }),
+};
 
 @Component({
   selector: 'app-upload',
   templateUrl: './upload.component.html',
-  styleUrls: ['./upload.component.css']
+  styleUrls: ['./upload.component.css'],
 })
 export class UploadComponent implements OnInit {
   title = 'video upload';
   files: any[] = [];
-
+  start!: any;
+  end!: any;
   videoData!: Video;
   videoData2!: Video;
 
@@ -28,12 +28,11 @@ export class UploadComponent implements OnInit {
   show = false;
   show2 = false;
 
-  constructor(
-    private http: HttpClient,
-    private videoService: VideoUploadService
-  ) {}
+  constructor(private http: HttpClient) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    scrip();
+  }
 
   selectVideo(event: any) {
     var reader = new FileReader();
@@ -45,9 +44,8 @@ export class UploadComponent implements OnInit {
       reader.onload = (event) => {
         this.url = (<FileReader>event.target).result;
         this.videos = file;
-        this.show2=!this.show2
-      //  console.log(reader.result);
-        
+        this.show2 = !this.show2;
+        //  console.log(reader.result);
       };
     }
   }
@@ -55,48 +53,57 @@ export class UploadComponent implements OnInit {
   onSubmit() {
     const formData = new FormData();
     formData.append('video', this.videos);
-  // fsExtra.copyFileSync(pathOrigin, `${pathDest}`);
-   let project=localStorage.getItem('id_project')
-   let user=localStorage.getItem('userId')
-   let path=localStorage.getItem('path')
+    // fsExtra.copyFileSync(pathOrigin, `${pathDest}`);
+    let project = localStorage.getItem('id_project');
+    let user = localStorage.getItem('userId');
+    let path = localStorage.getItem('path');
 
-
-   console.log(project);
+    console.log(project);
 
     this.http
-      .post<any>(`http://localhost:3000/api/v1/upload-video/${project}`, formData)
+      .post<any>(
+        `http://localhost:3000/api/v1/upload-video/${project}`,
+        formData
+      )
       .subscribe((data) => {
-        console.log('datta====',data);
+        console.log('datta====', data);
         this.videoData = data;
         this.videoData2 = data;
-        console.log('dat===>',this.videoData2);
+        console.log('dat===>', this.videoData2);
 
-        console.log('data =',{...this.videoData,project,user,path,origin:'local'});
- this.http.post<any>(`http://localhost:3000/api/v1/upload-video/create`,{...this.videoData,project,user,path,origin:'local'}).subscribe(data=>{
-        
-     console.log('data2=',data);
-     console.log('data3=',this.videoData);
-
-    
-   })
-
+        console.log('data =', {
+          ...this.videoData,
+          project,
+          user,
+          path,
+          origin: 'local',
+        });
+        this.http
+          .post<any>(`http://localhost:3000/api/v1/upload-video/create`, {
+            ...this.videoData,
+            project,
+            user,
+            path,
+            origin: 'local',
+          })
+          .subscribe((data) => {
+            console.log('data2=', data);
+            console.log('data3=', this.videoData);
+          });
       });
-      
-     
   }
-createVideoController(){
-  let project=localStorage.getItem('id_project')
-  let user=localStorage.getItem('userId')
-  let path=localStorage.getItem('path')
+  createVideoController() {
+    let project = localStorage.getItem('id_project');
+    let user = localStorage.getItem('userId');
+    let path = localStorage.getItem('path');
 
-  // this.http.post<any>(`http://localhost:3000/api/v1/upload-video/create`,{...this.videoData,project,user,path,origin:'local'}).subscribe(data=>{
-        
-  //   console.log('data2=',data);
-  //   console.log('data3=',this.videoData);
+    // this.http.post<any>(`http://localhost:3000/api/v1/upload-video/create`,{...this.videoData,project,user,path,origin:'local'}).subscribe(data=>{
 
-    
-  // })
-}
+    //   console.log('data2=',data);
+    //   console.log('data3=',this.videoData);
+
+    // })
+  }
   //********************************* */
   onFileDropped($event: any) {
     this.prepareFilesList($event);
@@ -160,5 +167,38 @@ createVideoController(){
     const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+  }
+
+  trim() {
+    var player = {
+      video: <HTMLVideoElement>document.getElementsByClassName('video')[0],
+      start: 0,
+      end: null,
+      controls: {
+        play: <HTMLVideoElement>(
+          document.getElementsByClassName('play-control')[0]
+        ),
+        seekToStart: <HTMLVideoElement>(
+          document.getElementsByClassName('seek-start')[0]
+        ),
+        seekToEnd: <HTMLVideoElement>(
+          document.getElementsByClassName('seek-end')[0]
+        ),
+        reset: <HTMLVideoElement>(
+          document.getElementsByClassName('reset-control')[0]
+        ),
+      },
+    };
+
+    if (player.video.currentTime <= 10) {
+      this.start = player.video.currentTime;
+      this.end = player.video.currentTime + 10;
+      console.log(player.video.currentTime);
+    } else {
+      this.start = player.video.currentTime - 10;
+      this.end = player.video.currentTime + 10;
+      console.log(this.start);
+      console.log(this.end);
+    }
   }
 }

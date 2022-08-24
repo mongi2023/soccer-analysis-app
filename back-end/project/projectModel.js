@@ -14,7 +14,7 @@ const ProjectSchema = new mongoose.Schema({
         type: String,
         required: [true, 'please provide the path to create a project'],
     },
-    user : {
+    user: {
         type: mongoose.Types.ObjectId,
         ref: 'UserApp',
         required: true,

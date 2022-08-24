@@ -1,26 +1,8 @@
 <!-- Image and text -->
 
-
-
-      <div class="container">
-        <div class="row">
-          <div class="col-sm">
-                     </div>
-          <div class="col-sm">
-
-
-
-
-                   <div class="col-sm">
-
-
-
-                   </div>
-                  </div>
-        </div>
-      </div>
-
-
+<div class="container">
+  <div class="row">
+    <div class="col">
       <div class="container">
         <div class="row">
           <div class="col">
@@ -64,51 +46,15 @@
         
             </div>
           </div>
-          <div class="col">
-            <form enctype='multipart/form-data' >
-
-              <h3>Name: {{ videoData?.name }}</h3>
-              <h3>Size: {{ videoData?.size }}</h3>
-              <h3>Duration: {{videoData?.duration}} </h3>
-              <h3>Extension: {{videoData?.extension}}</h3>
-              <div>
-                <button type="submit" class="btn btn-primary" (click)="onSubmit()" style="margin-left: 200px;">
-                  Upload Video
-                </button>
-              </div>
-            </form>
-          </div>
+         
         </div>
       </div>
 
+    </div>
+    <div class="col" >
+      <div class="wrapper">
 
-      <div class="container">
-        <div class="row">
-          <div class="col">
-            
-      <div class="video" *ngIf="show2" >
-        <video [src]="url" height="300" width="520" controls></video>
-      </div>
-
-
-    
-  </div>
-
-</div>
-</div>
-
-
-<!--  -->
-<div class="container">
-  <div class="row">
-    <div class="col">
-
-      
-         </div>
-    <div class="col">
-      <div class="wrapper" (change)="selectVideo($event)">
-       
-        <video *ngIf="show2" #vidRef class="video" src="assets/messi.mp4" type="video/mp4" width="640" autoload="metadata">
+        <video #vidRef   class="video" [src]="url" type="video/mp4" height="300" width="520" autoload="metadata">
            </video>
             <div class="playback">
           <div class="grabber start">
@@ -145,17 +91,36 @@
             <button class="seek-end fa fa-step-forward" title="Skip to End"></button>
           </div>
           <div>
-            <button class="trim-control"   data-toggle="modal" data-target="#staticBackdrop">Trim</button>
+            <button class="trim-control" (click)="trim()"  data-toggle="modal" data-target="#staticBackdrop">Trim</button>
           </div>
           <div>
-            <button class="trim-control"   data-toggle="modal" data-target="#staticBackdrop">Get Sequence</button>
+            <button class="trim-control" (click)="trim()"  data-toggle="modal" data-target="#staticBackdrop">Get Sequence</button>
           </div>
         </div>
-      </div>
-      </div>
+      </div>    </div>
   </div>
+
+</div>
+     
+
+
+  <div class="container">
+  <div class="col">
+    <form enctype='multipart/form-data' >
+
+      <h3>Name: {{ videoData?.name }}</h3>
+      <h3>Size: {{ videoData?.size }}</h3>
+      <h3>Duration: {{videoData?.duration}} </h3>
+      <h3>Extension: {{videoData?.extension}}</h3>
+      <div>
+        <button type="submit" class="btn btn-primary" (click)="onSubmit()" style="margin-left: 200px;">
+          Upload Video
+        </button>
+      </div>
+    </form>
   </div>
-<br><br><br><br><br><hr>
+ </div>
+      
 
 
  

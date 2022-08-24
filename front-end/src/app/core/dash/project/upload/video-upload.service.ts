@@ -7,6 +7,6 @@ import { Video } from './video';
   providedIn: 'root'
 })
 export class VideoUploadService {
-  constructor(private http:HttpClient) { }
+  constructor() { }
 
 }

@@ -10,7 +10,7 @@ declare function scrip(): any;
 export class AnalyseComponent implements OnInit {
   start!: any;
   end!:any
-  @ViewChild('videoPlayer', { static: false }) videoplayer!: ElementRef;
+ // @ViewChild('videoPlayer', { static: false }) videoplayer!: ElementRef;
 
   constructor() {}
 
