@@ -3,13 +3,14 @@ $prefix: 'toolbar-notification';
 .badge {
   	position: absolute;
   	top: 0;
-  	left: 53%;
+  	left: 55%;
   	font-weight: 700;
   	line-height: 3px;
   	height: 13px;
   	padding: 5px;
+	box-shadow: none;
     border-radius: 26%;
-    width: 30%;
+    width: 40%;
     background-color: #f44336;
   	color: #fff;
   	border-color:#f44336

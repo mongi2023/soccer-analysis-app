@@ -7,11 +7,15 @@ import { MatchDetailsComponent } from './match-details/matchDetails.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { MaterialModule } from 'src/app/shared/material/material.module';
+import { ActionCategoryComponent } from './action-category/action-category.component';
+import { SubActionCategoryComponent } from './sub-action-category/sub-action-category.component';
 
 @NgModule({
   declarations: [
     TeamComponent,
-    MatchDetailsComponent
+    MatchDetailsComponent,
+    ActionCategoryComponent,
+    SubActionCategoryComponent
   ],
   imports: [
     CommonModule,

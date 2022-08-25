@@ -10,7 +10,6 @@ const ActionCategorySchema = new mongoose.Schema({
     },
     description: {
         type: String,
-        minlength: 20
     },
     user: {
         type: mongoose.Types.ObjectId,

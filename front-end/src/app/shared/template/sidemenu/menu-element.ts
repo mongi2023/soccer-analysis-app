@@ -13,7 +13,6 @@ export const menus = [
                 'chip': false,
                 'open': true,
             }
-
         ]
     },
     {
@@ -191,11 +190,17 @@ export const menus = [
                 'open': false,
             },
             {
-                'name': 'Sequences',
-                'icon': 'mode_edit',
-                'link': 'dash/sequence',
-                'open': false,
-            }
+              'name': 'Action Category',
+              'icon': 'directions_run',
+              'link': 'dash/match/actioncat',
+              'open': false,
+          },
+          {
+            'name': 'Sub Action Category',
+            'icon': 'transfer_within_a_station',
+            'link': 'dash/match/subactioncat',
+            'open': false,
+        }
         ]
 
     },
@@ -286,7 +291,7 @@ export const menus = [
             //     'link': 'charts/nvd3-charts',
             // }
         ]
-    }, 
+    },
     // {
     //     'name': 'maps',
     //     'icon': 'map',

@@ -96,7 +96,6 @@ export class PlayersComponent implements OnInit {
 
       getTeamsController(){
         var project3= `${localStorage.getItem('id_project')}`
-        console.log('id===',project3);
       
         this.newProjectService.getAllTeamsService(project3).subscribe(data=>{
           console.log(data.teams.map((x:any)=>x._id));

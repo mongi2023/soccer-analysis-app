@@ -40,5 +40,4 @@ export class NewprojectService {
     
     return this.http.post<any>('http://localhost:3000/api/v1/team/teams-list/',{project},httpoptions)
    }
-
 }

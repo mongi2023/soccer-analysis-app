@@ -58,9 +58,11 @@ body{
 	padding: 24px;
 }
 .btn{
+	left: 37.5%;
 	display: block;
-	width: 100%;
-	padding: 5% !important;
+	width: 25%;
+	
+	padding: 1% !important;
 	font-size: 1.5em;
 	font-weight: 200;
 	margin-top: 18px;

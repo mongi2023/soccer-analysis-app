@@ -24,7 +24,7 @@ export class PlayerService {
     }
 
    getPlayerByTeamService(id:string):Observable<Player>{
-    console.log(id);
+  
     
     return this._http.get<Player>(`${this.baseAPI}/team/${id}/players`)
    }

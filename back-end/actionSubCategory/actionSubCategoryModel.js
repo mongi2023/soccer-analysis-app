@@ -7,8 +7,8 @@ const ActionSubCategorySchema = new mongoose.Schema({
         required: [true, 'Please provide the name of the sub-category action']
     },
     description: {
-        type: String,
-        minlength: 20
+        type: String
+
     },
     category: {
         type: mongoose.Types.ObjectId,
